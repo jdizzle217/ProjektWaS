@@ -22,7 +22,7 @@ public class Strategy {
 
 	// possible MOVEs
 	final static int COOPERATE = 1;
-	final static int DEFECT = 0;
+	final static int DECEIVE = 0;
 
 //***************PART TO BE MODIFIED = variable needed for your strategy *************************
 //*************************************************************************************************
@@ -39,7 +39,8 @@ public class Strategy {
 
 //************PART TO BE MODIFIED = implement other strategies here ***********************************
 			case PROB:
-
+                                // p = 0.4
+                                Move = (int)(Math.random() + 0.4); //random number between 0.4 and 1.4 casted to int
 				break;
 
 			case REAC:
