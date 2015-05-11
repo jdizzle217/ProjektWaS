@@ -1,55 +1,104 @@
 package ch.bfh.wstat.project;
 
+import java.math.BigDecimal;
+
 /**
- * Game : Implement iterated prisoner's dilemma game
+ * Implementation of the 'Iterated Prisoner's Dilemma Game'.
+ *
+ * @author strut1 & weidj1
  */
 public class Game {
 
-	//possible gain
-	static float GAIN_COL = 3; // gain for mutual collaboration
-	static float GAIN_TEM = 5; // gain for deception when other players collaborates
-	static float GAIN_LOS = 0; // gain for collaboration when other players deceives
-	static float GAIN_DEF = 1; // gain for mutual deception
+	/**
+	 * Standard gain for mutual collaboration.
+	 */
+	public static final BigDecimal GAIN_COLLABORATION = BigDecimal.valueOf(3);
 
-	//two players
-	Player Player1, Player2;
+	/**
+	 * Standard gain for deception when other player collaborates.
+	 */
+	public static final BigDecimal GAIN_DECEPTION = BigDecimal.valueOf(5);
 
-	//constructor
-	Game(Player Player1, Player Player2) {
-		this.Player1 = Player1;
-		this.Player2 = Player2;
+	/**
+	 * Standard gain for collaboration when other player deceives.
+	 */
+	public static final BigDecimal GAIN_LOSS = BigDecimal.valueOf(0);
+
+	/**
+	 * Standard gain for mutual deception.
+	 */
+	public static final BigDecimal GAIN_DECEPTION_ATTEMPT = BigDecimal.valueOf(1);
+
+	private final Player player1, player2; //participants
+
+	private final int rounds; //game information
+	private int round = 0;
+	private final Statistics statistics = new Statistics();
+
+	/**
+	 * Construct a game.
+	 *
+	 * @param player1 first participant / player
+	 * @param player2 second participant / player
+	 * @param rounds  number of rounds to play
+	 */
+	public Game(Player player1, Player player2, int rounds) {
+
+		this.player1 = player1;
+		this.player2 = player2;
+		this.rounds = rounds;
 	}
 
-	//round of game
-	public void play(int nGame) {
+	/**
+	 * Get the game statistics.
+	 *
+	 * @return game statistics
+	 */
+	public Statistics getStatistics() {
+		return this.statistics;
+	}
 
-		//get player moves
-		Player1.PlayerCurrentMove = Strategy.nextMove(Player1, Player2, nGame);
-		Player2.PlayerCurrentMove = Strategy.nextMove(Player2, Player1, nGame);
+	/**
+	 * Play all remaining rounds. (complete game)
+	 */
+	public void playRounds() {
 
-		//get result
-		if (Player1.PlayerCurrentMove == Strategy.COOPERATE)
-			if (Player2.PlayerCurrentMove == Strategy.COOPERATE) { 	// mutual collaboration (R,R)
-				Statistics.CooperateCooperate++;
-				Player1.update(GAIN_COL, nGame);
-				Player2.update(GAIN_COL, nGame);
-				//System.out.printf("Mutual collaboration\n");
-			} else { 													// player1 loses (S,T)
-				Statistics.CooperateDeceive++;
-				Player1.update(GAIN_LOS, nGame);
-				Player2.update(GAIN_TEM, nGame);
-				//System.out.printf("Player 1 loses\n");
+		while (this.round < this.rounds)
+			this.playRound();
+	}
+
+	/**
+	 * Play a single round.
+	 */
+	public void playRound() {
+
+		if (this.round >= this.rounds) //check if there are rounds left to play
+			throw new IllegalStateException("Maximum number of rounds reached.");
+
+		Move move1 = this.player1.getStrategy().determineNextMove(this.player1, this.player2); //determine the players' next moves
+		Move move2 = this.player2.getStrategy().determineNextMove(this.player2, this.player1);
+
+		if (move1 == Move.COOPERATE) //determine the round's gains and update players' histories
+			if (move2 == Move.COOPERATE) {
+				this.player1.updateHistory(move1, GAIN_COLLABORATION); //mutual collaboration (R, R)
+				this.player2.updateHistory(move2, GAIN_COLLABORATION);
+
+			} else {
+				this.player1.updateHistory(move1, GAIN_LOSS); //player 1 loses (S, T)
+				this.player2.updateHistory(move2, GAIN_DECEPTION);
 			}
-		else if (Player2.PlayerCurrentMove == Strategy.COOPERATE) { 	// player2 loses (T,S)
-			Statistics.DeceiveCooperate++;
-			Player1.update(GAIN_TEM, nGame);
-			Player2.update(GAIN_LOS, nGame);
-			//System.out.printf("Player 2 loses\n");
-		} else { 												// mutual deception (P,P)
-			Statistics.DeceiveDeceive++;
-			Player1.update(GAIN_DEF, nGame);
-			Player2.update(GAIN_DEF, nGame);
-			//System.out.printf("Mutual deception\n");
+
+		else if (move2 == Move.COOPERATE) {
+			this.player1.updateHistory(move1, GAIN_DECEPTION); //player 2 loses (T, S)
+			this.player2.updateHistory(move2, GAIN_LOSS);
+
+		} else {
+			this.player1.updateHistory(move1, GAIN_DECEPTION_ATTEMPT); //mutual deception (P, P)
+			this.player2.updateHistory(move2, GAIN_DECEPTION_ATTEMPT);
 		}
+
+		this.statistics.incrementEventFrequency(move1, move2); //update statistics
+
+		this.round++; //increment round index
 	}
 }

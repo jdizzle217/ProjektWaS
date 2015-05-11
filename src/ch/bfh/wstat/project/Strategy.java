@@ -1,63 +1,137 @@
 package ch.bfh.wstat.project;
 
-/*
- * Strategy: implement different strategies
+import java.util.Random;
+
+/**
+ * Possible strategies a player (prisoner) can follow in the 'Iterated Prisoner's Dilemma Game'.
  *
- * 1 - RAND = collaborate with probability 0.5
- * 2 - PROB = collaborate with probability p
- * 3 - ALT =  collaborate with probability p_CC if he has collaborated the last turn and with a probability p_CD if he has deceived.
- * 4 - REAC = collaborate with probability p_CC if the other player has collaborated the last turn and with a probability p_CD if he has deceived.
- * 5 - WIN =  redo same action with probability p_R if he has won more than the other player the last turn
- * 6 - OWN =  *describe here your own strategy*
+ * @author strut1 & weidj1
  */
-public class Strategy {
+public enum Strategy {
 
-	//type of strategy
-	final public static int RAND = 1;
-	final public static int PROB = 2;
-	final public static int ALT = 3;
-	final public static int REAC = 4;
-	final public static int WIN = 5;
-	final public static int OWN = 6;
+	/**
+	 * Random strategy. <br />
+	 * Collaborate with a probability of 50%.
+	 */
+	RAND {
 
-	// possible MOVEs
-	final static int COOPERATE = 1;
-	final static int DECEIVE = 0;
-
-//***************PART TO BE MODIFIED = variable needed for your strategy *************************
-//*************************************************************************************************
-	// compute next move according to strategy
-	public static int nextMove(Player Player1, Player Player2, int nGame) {
-
-		int Move = -1;
-
-		switch (Player1.PlayerStrategy) {
-
-			case RAND:
-				Move = (int)(Math.random() + 0.5); //random number between 0.5 and 1.5 casted to int
-				break;
-
-//************PART TO BE MODIFIED = implement other strategies here ***********************************
-			case PROB:
-				// p = 0.4
-				Move = (int)(Math.random() + 0.4); //random number between 0.4 and 1.4 casted to int
-				break;
-
-			case REAC:
-
-				break;
-
-			case ALT:
-
-				break;
-
-			//**********************************************************************************
-			default:
-				System.out.println("Strategy not implemented\n");
-				System.exit(-1);
-				break;
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+			return random.nextDouble() <= .5 ? Move.COOPERATE : Move.DECEIVE;
 		}
+	},
 
-		return Move;
-	}
+	/**
+	 * Probability strategy. <br />
+	 * Collaborate with a probability {@code p}.
+	 */
+	PROB {
+
+		/**
+		 * Probability {@code p} to collaborate.
+		 */
+		public static final double PROBABILITY = .4;
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+			return random.nextDouble() <= PROBABILITY ? Move.COOPERATE : Move.DECEIVE;
+		}
+	},
+
+	/**
+	 * Reaction strategy. <br />
+	 * Collaborate with a probability {@code p_CC} if the other player collaborated in the last round and with a probability {@code p_CD} if he deceived.
+	 */
+	REAC {
+
+		/**
+		 * Probability {@code p_CC} to collaborate if the other player collaborated in last round.
+		 */
+		public static final double PROBABILITY_COLLABORATED = .60;
+
+		/**
+		 * Probability {@code p_CD} to collaborate if the other player deceived in last round.
+		 */
+		public static final double PROBABILITY_DECEIVED = .35;
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+			throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+		}
+	},
+
+	/**
+	 * Alternating strategy. <br />
+	 * Collaborate with a probability {@code p_CC} if the player also collaborated in the last round and with a probability {@code p_CD} if he deceived.
+	 */
+	ALTE {
+
+		/**
+		 * Probability {@code p_CC} to collaborate if the player collaborated in last round as well.
+		 */
+		public static final double PROBABILITY_COLLABORATED = .40;
+
+		/**
+		 * Probability {@code p_CD} to collaborate if the player deceived in last round.
+		 */
+		public static final double PROBABILITY_DECEIVED = .65;
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+			throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+		}
+	},
+
+	/**
+	 * Winning strategy. <br />
+	 * Repeat the same move with a probability {@code p_R} if the player won more than the other player in the last round.
+	 */
+	WIN {
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+			throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+		}
+	},
+
+	/**
+	 * Our own strategy.
+	 */
+	OWN {
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+			throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+		}
+	};
+
+	private static Random random = new Random();
+
+	/**
+	 * Determine the player's next move.
+	 *
+	 * @param currentPlayer player to determine next move for
+	 * @param otherPlayer   player to compete against
+	 *
+	 * @return the player's next move
+	 */
+	public abstract Move determineNextMove(Player currentPlayer, Player otherPlayer);
 }

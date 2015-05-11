@@ -1,27 +1,66 @@
 package ch.bfh.wstat.project;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+
 /**
- * Player : Implements for each player - Strategy, Movement History, ...
+ * Player (prisoner) in the 'Iterated Prisoner's Dilemma Game'.
+ *
+ * @author strut1 & weidj1
  */
 public class Player {
 
-	String NameStrategy;
-	int PlayerCurrentMove = -1;
-	int PlayerStrategy = -1;
-	int[] MoveHistory;
-	float[] GainHistory;
-	float MiddleGain;
+	private final Strategy strategy;
 
-	//constructor
-	Player(int PlayerStrategy, int nbGames) {
-		this.PlayerStrategy = PlayerStrategy;
-		MoveHistory = new int[nbGames];
-		GainHistory = new float[nbGames];
+	private final ArrayList<RoundInformation> history = new ArrayList<>();
+	private BigDecimal totalGain = BigDecimal.ZERO;
+
+	/**
+	 * Construct a new player with a specific strategy.
+	 *
+	 * @param strategy strategy to follow
+	 */
+	Player(Strategy strategy) {
+
+		this.strategy = strategy;
 	}
 
-	// update data history of the player (end of each round)
-	public void update(float Gain, int nGame) {
-		GainHistory[nGame] = Gain;
-		MoveHistory[nGame] = PlayerCurrentMove;
+	/**
+	 * Add the round's move and gain the player's history.
+	 *
+	 * @param move this round's move
+	 * @param gain gain the move resulted in
+	 */
+	public void updateHistory(Move move, BigDecimal gain) {
+
+		this.history.add(new RoundInformation(move, gain));
+		this.totalGain = this.totalGain.add(gain);
+	}
+
+	/**
+	 * Get the strategy the player follows.
+	 *
+	 * @return strategy the player follows
+	 */
+	public Strategy getStrategy() {
+		return this.strategy;
+	}
+
+	/**
+	 * Get the player's total gain up to the current round.
+	 *
+	 * @return player's total gain up to the current round
+	 */
+	public BigDecimal getTotalGain() {
+		return this.totalGain;
+	}
+
+	/**
+	 * Get the player's middle gain during the rounds already played.
+	 *
+	 * @return player's middle gain during the rounds already played
+	 */
+	public BigDecimal getMiddleGain() {
+		return this.totalGain.divide(BigDecimal.valueOf(this.history.size()));
 	}
 }
