@@ -1,6 +1,7 @@
 package ch.bfh.wstat.project;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 
 /**
@@ -61,6 +62,6 @@ public class Player {
 	 * @return player's middle gain during the rounds already played
 	 */
 	public BigDecimal getMiddleGain() {
-		return this.totalGain.divide(BigDecimal.valueOf(this.history.size()));
+		return this.totalGain.divide(BigDecimal.valueOf(this.history.size()), MathContext.DECIMAL128);
 	}
 }
