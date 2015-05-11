@@ -3,7 +3,7 @@ package ch.bfh.wstat.project;
 /**
  * Statistics about the 'Iterated Prisoner's Dilemma Game'.
  *
- * @author strut1 & weidj1
+ * @author strut1 &amp; weidj1
  */
 public class Statistics {
 
@@ -11,7 +11,7 @@ public class Statistics {
 	private final int[][] events = {{0, 0}, {0, 0}};
 
 	/**
-	 * Get the (absolute) frequency of a specific event. <br />
+	 * Get the (absolute) frequency of a specific event. <br>
 	 * The event is defined by the moves of players 1 and 2.
 	 *
 	 * @param move1 move of player 1
@@ -25,7 +25,7 @@ public class Statistics {
 	}
 
 	/**
-	 * Increment the (absolute) frequency of a specific event. <br />
+	 * Increment the (absolute) frequency of a specific event. <br>
 	 * The event is defined by the moves of players 1 and 2.
 	 *
 	 * @param move1 move of player 1
@@ -38,7 +38,7 @@ public class Statistics {
 	}
 
 	/**
-	 * Get the relative frequency of a specific event. <br />
+	 * Get the relative frequency of a specific event. <br>
 	 * The event is defined by the moves of players 1 and 2.
 	 *
 	 * @param move1 move of player 1

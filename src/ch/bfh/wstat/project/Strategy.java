@@ -5,12 +5,12 @@ import java.util.Random;
 /**
  * Possible strategies a player (prisoner) can follow in the 'Iterated Prisoner's Dilemma Game'.
  *
- * @author strut1 & weidj1
+ * @author strut1 &amp; weidj1
  */
 public enum Strategy {
 
 	/**
-	 * Random strategy. <br />
+	 * Random strategy. <br>
 	 * Collaborate with a probability of 50%.
 	 */
 	RAND {
@@ -25,7 +25,7 @@ public enum Strategy {
 	},
 
 	/**
-	 * Probability strategy. <br />
+	 * Probability strategy. <br>
 	 * Collaborate with a probability {@code p}.
 	 */
 	PROB {
@@ -45,7 +45,7 @@ public enum Strategy {
 	},
 
 	/**
-	 * Reaction strategy. <br />
+	 * Reaction strategy. <br>
 	 * Collaborate with a probability {@code p_CC} if the other player collaborated in the last round and with a probability {@code p_CD} if he deceived.
 	 */
 	REAC {
@@ -70,7 +70,7 @@ public enum Strategy {
 	},
 
 	/**
-	 * Alternating strategy. <br />
+	 * Alternating strategy. <br>
 	 * Collaborate with a probability {@code p_CC} if the player also collaborated in the last round and with a probability {@code p_CD} if he deceived.
 	 */
 	ALTE {
@@ -95,7 +95,7 @@ public enum Strategy {
 	},
 
 	/**
-	 * Winning strategy. <br />
+	 * Winning strategy. <br>
 	 * Repeat the same move with a probability {@code p_R} if the player won more than the other player in the last round.
 	 */
 	WIN {

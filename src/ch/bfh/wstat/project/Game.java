@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Implementation of the 'Iterated Prisoner's Dilemma Game'.
  *
- * @author strut1 & weidj1
+ * @author strut1 &amp; weidj1
  */
 public class Game {
 

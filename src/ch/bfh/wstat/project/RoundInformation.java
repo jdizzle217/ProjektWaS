@@ -3,9 +3,9 @@ package ch.bfh.wstat.project;
 import java.math.BigDecimal;
 
 /**
- * Information about a player's (prisoner's) move & gain in one round of the 'Iterated Prisoner's Dilemma Game'.
+ * Information about a player's (prisoner's) move &amp; gain in one round of the 'Iterated Prisoner's Dilemma Game'.
  *
- * @author strut1 & weidj1
+ * @author strut1 &amp; weidj1
  */
 public class RoundInformation {
 

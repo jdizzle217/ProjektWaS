@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Main class of the project 'Iterated Prisoner's Dilemma Game'.
  *
- * @author strut1 & weidj1
+ * @author strut1 &amp; weidj1
  */
 public class Project {
 
