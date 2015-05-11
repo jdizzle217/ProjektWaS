@@ -12,52 +12,52 @@ package ch.bfh.wstat.project;
  */
 public class Strategy {
 
-	//type of strategy
-	final public static int RAND = 1;
-	final public static int PROB = 2;
-	final public static int ALT = 3;
-	final public static int REAC = 4;
-	final public static int WIN = 5;
-	final public static int OWN = 6;
+    //type of strategy
+    final public static int RAND = 1;
+    final public static int PROB = 2;
+    final public static int ALT = 3;
+    final public static int REAC = 4;
+    final public static int WIN = 5;
+    final public static int OWN = 6;
 
-	// possible MOVEs
-	final static int COOPERATE = 1;
-	final static int DECEIVE = 0;
+    // possible MOVEs
+    final static int COOPERATE = 1;
+    final static int DECEIVE = 0;
 
 //***************PART TO BE MODIFIED = variable needed for your strategy *************************
 //*************************************************************************************************
-	// compute next move according to strategy
-	public static int nextMove(Player Player1, Player Player2, int nGame) {
+    // compute next move according to strategy
+    public static int nextMove(Player Player1, Player Player2, int nGame) {
 
-		int Move = -1;
+        int Move = -1;
 
-		switch (Player1.PlayerStrategy) {
+        switch (Player1.PlayerStrategy) {
 
-			case RAND:
-				Move = (int)(Math.random() + 0.5); //random number between 0.5 and 1.5 casted to int
-				break;
+            case RAND:
+                Move = (int) (Math.random() + 0.5); //random number between 0.5 and 1.5 casted to int
+                break;
 
 //************PART TO BE MODIFIED = implement other strategies here ***********************************
-			case PROB:
-                                // p = 0.4
-                                Move = (int)(Math.random() + 0.4); //random number between 0.4 and 1.4 casted to int
-				break;
+            case PROB:
+                // p = 0.4
+                Move = (int) (Math.random() + 0.4); //random number between 0.4 and 1.4 casted to int
+                break;
 
-			case REAC:
+            case REAC:
 
-				break;
+                break;
 
-			case ALT:
+            case ALT:
 
-				break;
+                break;
 
-			//**********************************************************************************
-			default:
-				System.out.println("Strategy not implemented\n");
-				System.exit(-1);
-				break;
-		}
+            //**********************************************************************************
+            default:
+                System.out.println("Strategy not implemented\n");
+                System.exit(-1);
+                break;
+        }
 
-		return Move;
-	}
+        return Move;
+    }
 }

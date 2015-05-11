@@ -11,5 +11,8 @@ public class Statistics {
 	public static int DefectDefect = 0;
 
 //***************PART TO BE MODIFIED = VARIABLES AND FUNCTIONS FOR STAT *************************
+
+
+
 //*************************************************************************************************
 }

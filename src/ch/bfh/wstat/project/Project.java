@@ -7,9 +7,9 @@ public class Project {
 
 	public static void main(String[] args) {
 
-		int Strategy1 = 1; //default strategy RANDOM
+		int Strategy1 = 2; //default strategy RANDOM
 		int Strategy2 = 1; //default strategy RANDOM
-		int nbGames = 10; // default number of turns
+		int nbGames = 100000; // default number of turns
 
 		if (args.length > 0)
 			try {
