@@ -5,8 +5,8 @@ package ch.bfh.wstat.project;
  *
  * 1 - RAND = collaborate with probability 0.5
  * 2 - PROB = collaborate with probability p
- * 3 - ALT =  collaborate with probability p_CC if he has collaborated the last turn and with a probability p_CD if he has defected.
- * 4 - REAC = collaborate with probability p_CC if the other player has collaborated the last turn and with a probability p_CD if he has defected.
+ * 3 - ALT =  collaborate with probability p_CC if he has collaborated the last turn and with a probability p_CD if he has deceived.
+ * 4 - REAC = collaborate with probability p_CC if the other player has collaborated the last turn and with a probability p_CD if he has deceived.
  * 5 - WIN =  redo same action with probability p_R if he has won more than the other player the last turn
  * 6 - OWN =  *describe here your own strategy*
  */
