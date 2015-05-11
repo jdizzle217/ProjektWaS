@@ -33,12 +33,12 @@ public class Game {
 				Statistics.CooperateCooperate++;
 				Player1.update(GAIN_COL, nGame);
 				Player2.update(GAIN_COL, nGame);
-				System.out.printf("Mutual collaboration\n");
+				//System.out.printf("Mutual collaboration\n");
 			} else { 													// player1 loses (S,T)
 				Statistics.CooperateDeceive++;
 				Player1.update(GAIN_LOS, nGame);
 				Player2.update(GAIN_TEM, nGame);
-				System.out.printf("Player 1 loses\n");
+				//System.out.printf("Player 1 loses\n");
 			}
 		else if (Player2.PlayerCurrentMove == Strategy.COOPERATE) { 	// player2 loses (T,S)
 			Statistics.DeceiveCooperate++;
@@ -50,7 +50,6 @@ public class Game {
 			Player1.update(GAIN_DEF, nGame);
 			Player2.update(GAIN_DEF, nGame);
 			//System.out.printf("Mutual deception\n");
-
 		}
 	}
 }
