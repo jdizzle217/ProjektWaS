@@ -109,6 +109,6 @@ public class Project {
 		System.out.println("\nPLAYER STATISTICS:\n          total gain | middle gain"); //print information about the individual players
 		System.out.printf("player 1: %,10.2f | %,11.2f%n", player1.getTotalGain(), player1.getMiddleGain());
 		System.out.printf("player 2: %,10.2f | %,11.2f%n", player2.getTotalGain(), player2.getMiddleGain());
-		System.out.printf("total: %,13.2f%n", player1.getTotalGain().add(player2.getTotalGain()));
+		System.out.printf("total: %,13.2f | %,11.2f%n", game.getTotalGain(), game.getMiddleGain());
 	}
 }
