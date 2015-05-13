@@ -15,14 +15,14 @@ public enum Strategy {
 	 */
 	RAND {
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-			return random.nextDouble() <= .5 ? Move.COOPERATE : Move.DECEIVE;
-		}
-	},
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+				return random.nextInt(2) < 1 ? Move.COOPERATE : Move.DECEIVE;
+			}
+		},
 
 	/**
 	 * Probability strategy. <br>
@@ -30,19 +30,19 @@ public enum Strategy {
 	 */
 	PROB {
 
-		/**
-		 * Probability {@code p} to collaborate.
-		 */
-		public static final double PROBABILITY = .4;
+			/**
+			 * Probability {@code p} to collaborate.
+			 */
+			public static final double PROBABILITY = .4;
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-			return random.nextDouble() <= PROBABILITY ? Move.COOPERATE : Move.DECEIVE;
-		}
-	},
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+				return random.nextDouble() < PROBABILITY ? Move.COOPERATE : Move.DECEIVE;
+			}
+		},
 
 	/**
 	 * Reaction strategy. <br>
@@ -50,24 +50,24 @@ public enum Strategy {
 	 */
 	REAC {
 
-		/**
-		 * Probability {@code p_CC} to collaborate if the other player collaborated in last round.
-		 */
-		public static final double PROBABILITY_COLLABORATED = .60;
+			/**
+			 * Probability {@code p_CC} to collaborate if the other player collaborated in last round.
+			 */
+			public static final double PROBABILITY_COLLABORATED = .60;
 
-		/**
-		 * Probability {@code p_CD} to collaborate if the other player deceived in last round.
-		 */
-		public static final double PROBABILITY_DECEIVED = .35;
+			/**
+			 * Probability {@code p_CD} to collaborate if the other player deceived in last round.
+			 */
+			public static final double PROBABILITY_DECEIVED = .35;
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-			throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
-		}
-	},
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+				throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+			}
+		},
 
 	/**
 	 * Alternating strategy. <br>
@@ -75,24 +75,24 @@ public enum Strategy {
 	 */
 	ALTE {
 
-		/**
-		 * Probability {@code p_CC} to collaborate if the player collaborated in last round as well.
-		 */
-		public static final double PROBABILITY_COLLABORATED = .40;
+			/**
+			 * Probability {@code p_CC} to collaborate if the player collaborated in last round as well.
+			 */
+			public static final double PROBABILITY_COLLABORATED = .40;
 
-		/**
-		 * Probability {@code p_CD} to collaborate if the player deceived in last round.
-		 */
-		public static final double PROBABILITY_DECEIVED = .65;
+			/**
+			 * Probability {@code p_CD} to collaborate if the player deceived in last round.
+			 */
+			public static final double PROBABILITY_DECEIVED = .65;
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-			throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
-		}
-	},
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+				throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+			}
+		},
 
 	/**
 	 * Winning strategy. <br>
@@ -100,28 +100,28 @@ public enum Strategy {
 	 */
 	WIN {
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-			throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
-		}
-	},
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+				throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+			}
+		},
 
 	/**
 	 * Our own strategy.
 	 */
 	OWN {
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-			throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
-		}
-	};
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+				throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+			}
+		};
 
 	private static Random random = new Random();
 
