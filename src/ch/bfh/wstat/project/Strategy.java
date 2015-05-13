@@ -20,6 +20,7 @@ public enum Strategy {
 			 */
 			@Override
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+
 				return random.nextInt(2) < 1 ? Move.COOPERATE : Move.DECEIVE;
 			}
 		},
@@ -40,6 +41,7 @@ public enum Strategy {
 			 */
 			@Override
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+
 				return random.nextDouble() < PROBABILITY ? Move.COOPERATE : Move.DECEIVE;
 			}
 		},

@@ -1,6 +1,7 @@
 package ch.bfh.wstat.project;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * Implementation of the 'Iterated Prisoner's Dilemma Game'.
@@ -100,5 +101,23 @@ public class Game {
 		this.statistics.incrementEventFrequency(move1, move2); //update statistics
 
 		this.round++; //increment round index
+	}
+
+	/**
+	 * Get the players' total gain up to the current round.
+	 *
+	 * @return players' total gain up to the current round
+	 */
+	public BigDecimal getTotalGain() {
+		return this.player1.getTotalGain().add(this.player2.getTotalGain());
+	}
+
+	/**
+	 * Get the players' middle gain during the rounds already played.
+	 *
+	 * @return players' middle gain during the rounds already played
+	 */
+	public BigDecimal getMiddleGain() {
+		return this.getTotalGain().divide(BigDecimal.valueOf(this.round), MathContext.DECIMAL128);
 	}
 }
