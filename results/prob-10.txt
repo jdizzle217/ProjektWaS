@@ -4,14 +4,14 @@ player 2 follows strategy 0 (RAND)
 game will be played over 10 rounds
 
 GAME STATISTICS:
-(1, 1):      5 time(s) -  50.0%
-(1, 0):      2 time(s) -  20.0%
-(0, 1):      2 time(s) -  20.0%
-(0, 0):      1 time(s) -  10.0%
-total:      10 time(s)
+(1, 1):       2 time(s) -  20.0%
+(1, 0):       2 time(s) -  20.0%
+(0, 1):       1 time(s) -  10.0%
+(0, 0):       5 time(s) -  50.0%
+total:       10 time(s)
 
 PLAYER STATISTICS:
           total gain | middle gain
-player 1:      26.00 |        2.60
-player 2:      26.00 |        2.60
-total:         52.00
+player 1:      21.00 |        2.10
+player 2:      16.00 |        1.60
+total:         37.00 |        3.70
