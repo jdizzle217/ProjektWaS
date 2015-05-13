@@ -86,6 +86,11 @@ public class Project {
 	 */
 	public void playGame(Strategy strategy1, Strategy strategy2, int rounds) {
 
+		System.out.println("\nGAME INFORMATION:"); //print information about the game
+		System.out.printf("player 1 follows strategy %s%n", strategy1);
+		System.out.printf("player 2 follows strategy %s%n", strategy2);
+		System.out.printf("game will be played over %d rounds%n", rounds);
+
 		Player player1 = new Player(strategy1); //create the two players
 		Player player2 = new Player(strategy2);
 
