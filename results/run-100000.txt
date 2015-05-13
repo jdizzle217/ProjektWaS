@@ -11,7 +11,7 @@ GAME STATISTICS:
 total: 100,000 time(s)
 
 PLAYER STATISTICS:
-            total |  middle gain
-player 1: 240,534.00 |    2.41
-player 2: 189,689.00 |    1.90
-total: 430,223.00
+          total gain | middle gain
+player 1: 240,534.00 |        2.41
+player 2: 189,689.00 |        1.90
+total:    430,223.00

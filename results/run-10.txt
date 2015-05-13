@@ -11,7 +11,7 @@ GAME STATISTICS:
 total:      10 time(s)
 
 PLAYER STATISTICS:
-            total |  middle gain
-player 1:   26.00 |    2.60
-player 2:   26.00 |    2.60
-total:      52.00
+          total gain | middle gain
+player 1:      26.00 |        2.60
+player 2:      26.00 |        2.60
+total:         52.00
