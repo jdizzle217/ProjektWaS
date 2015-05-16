@@ -11,7 +11,10 @@ public enum Strategy {
 
 	/**
 	 * Random strategy. <br>
-	 * Collaborate with a probability of 50%.
+	 * Co-operate with a probability of 50%.
+	 *//**
+	 * Random strategy. <br>
+	 * Co-operate with a probability of 50%.
 	 */
 	RAND {
 
@@ -27,12 +30,12 @@ public enum Strategy {
 
 	/**
 	 * Probability strategy. <br>
-	 * Collaborate with a probability {@code p}.
+	 * Co-operate with a probability {@code p}.
 	 */
 	PROB {
 
 			/**
-			 * Probability {@code p} to collaborate.
+			 * Probability {@code p} to co-operate.
 			 */
 			public static final double PROBABILITY = .4;
 
@@ -48,22 +51,22 @@ public enum Strategy {
 
 	/**
 	 * Reaction strategy. <br>
-	 * Collaborate with a probability {@code p_CC} if the other player collaborated in the last round and with a probability {@code p_CD} if he deceived.
+	 * Co-operate with a probability {@code p_CC} if the other player co-operated in the last round and with a probability {@code p_CD} if he deceived.
 	 */
 	REAC {
 
 			/**
-			 * Probability to collaborate in the first round.
+			 * Probability to co-operate in the first round.
 			 */
 			public static final double PROBABILITY_INITAL = .6;
 
 			/**
-			 * Probability {@code p_CC} to collaborate if the other player collaborated in last round.
+			 * Probability {@code p_CC} to co-operate if the other player co-operated in last round.
 			 */
-			public static final double PROBABILITY_COLLABORATED = .6;
+			public static final double PROBABILITY_COOPERATED = .6;
 
 			/**
-			 * Probability {@code p_CD} to collaborate if the other player deceived in last round.
+			 * Probability {@code p_CD} to co-operate if the other player deceived in last round.
 			 */
 			public static final double PROBABILITY_DECEIVED = .35;
 
@@ -77,7 +80,7 @@ public enum Strategy {
 				if (otherPlayer.getNumberOfRounds() == 0)
 					p = PROBABILITY_INITAL;
 				else
-					p = otherPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COLLABORATED : PROBABILITY_DECEIVED;
+					p = otherPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COOPERATED : PROBABILITY_DECEIVED;
 
 				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
@@ -85,22 +88,22 @@ public enum Strategy {
 
 	/**
 	 * Alternating strategy. <br>
-	 * Collaborate with a probability {@code p_CC} if the player also collaborated in the last round and with a probability {@code p_CD} if he deceived.
+	 * Co-operate with a probability {@code p_CC} if the player also co-operated in the last round and with a probability {@code p_CD} if he deceived.
 	 */
 	ALTE {
 
 			/**
-			 * Probability to collaborate in the first round.
+			 * Probability to co-operate in the first round.
 			 */
 			public static final double PROBABILITY_INITAL = .6;
 
 			/**
-			 * Probability {@code p_CC} to collaborate if the player collaborated in last round as well.
+			 * Probability {@code p_CC} to co-operate if the player co-operated in last round as well.
 			 */
-			public static final double PROBABILITY_COLLABORATED = .4;
+			public static final double PROBABILITY_COOPERATED = .4;
 
 			/**
-			 * Probability {@code p_CD} to collaborate if the player deceived in last round.
+			 * Probability {@code p_CD} to co-operate if the player deceived in last round.
 			 */
 			public static final double PROBABILITY_DECEIVED = .65;
 
@@ -114,7 +117,7 @@ public enum Strategy {
 				if (otherPlayer.getNumberOfRounds() == 0)
 					p = PROBABILITY_INITAL;
 				else
-					p = otherPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COLLABORATED : PROBABILITY_DECEIVED;
+					p = otherPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COOPERATED : PROBABILITY_DECEIVED;
 
 				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
@@ -127,17 +130,17 @@ public enum Strategy {
 	WIN {
 
 			/**
-			 * Probability to collaborate in the first round.
+			 * Probability to co-operate in the first round.
 			 */
 			public static final double PROBABILITY_INITAL = .6;
 
 			/**
-			 * Probability {@code p_R} to collaborate if the player won more than the other player in last round.
+			 * Probability {@code p_R} to co-operate if the player won more than the other player in last round.
 			 */
 			public static final double PROBABILITY_WON = .6;
 
 			/**
-			 * Probability to collaborate if the player won less than the other player in last round.
+			 * Probability to co-operate if the player won less than the other player in last round.
 			 */
 			public static final double PROBABILITY_LOST = .35;
 
@@ -173,8 +176,23 @@ public enum Strategy {
 		},
 
 	/**
+	 * Co-operation strategy. <br>
+	 * Always co-operate.
+	 */
+	COOP {
+
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+				return Move.COOPERATE;
+			}
+		},
+
+	/**
 	 * Deception strategy. <br>
-	 * Never collaborate.
+	 * Never co-operate.
 	 */
 	DECV {
 

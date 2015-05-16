@@ -11,29 +11,29 @@ import java.math.MathContext;
 public class Game {
 
 	/**
-	 * Standard gain for mutual collaboration.
+	 * Standard gain for mutual co-operation.
 	 */
-	public static final BigDecimal GAIN_COLLABORATION = BigDecimal.valueOf(3);
+	public static final BigDecimal GAIN_COOPERATION = BigDecimal.valueOf(3);
 
 	/**
-	 * Standard gain for deception when other player collaborates.
+	 * Standard gain for deception when other player co-operates.
 	 */
-	public static final BigDecimal GAIN_DECEPTION = BigDecimal.valueOf(5);
+	public static final BigDecimal GAIN_WIN = BigDecimal.valueOf(5);
 
 	/**
-	 * Standard gain for collaboration when other player deceives.
+	 * Standard gain for co-operation when other player deceives.
 	 */
 	public static final BigDecimal GAIN_LOSS = BigDecimal.valueOf(0);
 
 	/**
 	 * Standard gain for mutual deception.
 	 */
-	public static final BigDecimal GAIN_DECEPTION_ATTEMPT = BigDecimal.valueOf(1);
+	public static final BigDecimal GAIN_DECEPTION = BigDecimal.valueOf(1);
 
 	private final Player player1, player2; //participants
 
 	private final int rounds; //game information
-	private int round = 0;
+	private int roundIndex = 0;
 	private final Statistics statistics = new Statistics();
 
 	/**
@@ -64,7 +64,7 @@ public class Game {
 	 */
 	public void playRounds() {
 
-		while (this.round < this.rounds)
+		while (this.roundIndex < this.rounds)
 			this.playRound();
 	}
 
@@ -73,7 +73,7 @@ public class Game {
 	 */
 	public void playRound() {
 
-		if (this.round >= this.rounds) //check if there are rounds left to play
+		if (this.roundIndex >= this.rounds) //check if there are rounds left to play
 			throw new IllegalStateException("Maximum number of rounds reached.");
 
 		Move move1 = this.player1.getStrategy().determineNextMove(this.player1, this.player2); //determine the players' next moves
@@ -81,26 +81,26 @@ public class Game {
 
 		if (move1 == Move.COOPERATE) //determine the round's gains and update players' histories
 			if (move2 == Move.COOPERATE) {
-				this.player1.addRound(move1, GAIN_COLLABORATION); //mutual collaboration (R, R)
-				this.player2.addRound(move2, GAIN_COLLABORATION);
+				this.player1.addRound(move1, GAIN_COOPERATION); //mutual co-operation (R, R)
+				this.player2.addRound(move2, GAIN_COOPERATION);
 
 			} else {
 				this.player1.addRound(move1, GAIN_LOSS); //player 1 loses (S, T)
-				this.player2.addRound(move2, GAIN_DECEPTION);
+				this.player2.addRound(move2, GAIN_WIN);
 			}
 
 		else if (move2 == Move.COOPERATE) {
-			this.player1.addRound(move1, GAIN_DECEPTION); //player 2 loses (T, S)
+			this.player1.addRound(move1, GAIN_WIN); //player 2 loses (T, S)
 			this.player2.addRound(move2, GAIN_LOSS);
 
 		} else {
-			this.player1.addRound(move1, GAIN_DECEPTION_ATTEMPT); //mutual deception (P, P)
-			this.player2.addRound(move2, GAIN_DECEPTION_ATTEMPT);
+			this.player1.addRound(move1, GAIN_DECEPTION); //mutual deception (P, P)
+			this.player2.addRound(move2, GAIN_DECEPTION);
 		}
 
 		this.statistics.incrementEventFrequency(move1, move2); //update statistics
 
-		this.round++; //increment round index
+		this.roundIndex++; //increment round index
 	}
 
 	/**
@@ -118,6 +118,6 @@ public class Game {
 	 * @return players' middle gain during the rounds already played
 	 */
 	public BigDecimal getMiddleGain() {
-		return this.getTotalGain().divide(BigDecimal.valueOf(this.round), MathContext.DECIMAL128);
+		return this.getTotalGain().divide(BigDecimal.valueOf(this.roundIndex), MathContext.DECIMAL128);
 	}
 }
