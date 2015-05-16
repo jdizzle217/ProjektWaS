@@ -12,9 +12,6 @@ public enum Strategy {
 	/**
 	 * Random strategy. <br>
 	 * Co-operate with a probability of 50%.
-	 *//**
-	 * Random strategy. <br>
-	 * Co-operate with a probability of 50%.
 	 */
 	RAND {
 
