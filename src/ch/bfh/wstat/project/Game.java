@@ -81,21 +81,21 @@ public class Game {
 
 		if (move1 == Move.COOPERATE) //determine the round's gains and update players' histories
 			if (move2 == Move.COOPERATE) {
-				this.player1.updateHistory(move1, GAIN_COLLABORATION); //mutual collaboration (R, R)
-				this.player2.updateHistory(move2, GAIN_COLLABORATION);
+				this.player1.addRound(move1, GAIN_COLLABORATION); //mutual collaboration (R, R)
+				this.player2.addRound(move2, GAIN_COLLABORATION);
 
 			} else {
-				this.player1.updateHistory(move1, GAIN_LOSS); //player 1 loses (S, T)
-				this.player2.updateHistory(move2, GAIN_DECEPTION);
+				this.player1.addRound(move1, GAIN_LOSS); //player 1 loses (S, T)
+				this.player2.addRound(move2, GAIN_DECEPTION);
 			}
 
 		else if (move2 == Move.COOPERATE) {
-			this.player1.updateHistory(move1, GAIN_DECEPTION); //player 2 loses (T, S)
-			this.player2.updateHistory(move2, GAIN_LOSS);
+			this.player1.addRound(move1, GAIN_DECEPTION); //player 2 loses (T, S)
+			this.player2.addRound(move2, GAIN_LOSS);
 
 		} else {
-			this.player1.updateHistory(move1, GAIN_DECEPTION_ATTEMPT); //mutual deception (P, P)
-			this.player2.updateHistory(move2, GAIN_DECEPTION_ATTEMPT);
+			this.player1.addRound(move1, GAIN_DECEPTION_ATTEMPT); //mutual deception (P, P)
+			this.player2.addRound(move2, GAIN_DECEPTION_ATTEMPT);
 		}
 
 		this.statistics.incrementEventFrequency(move1, move2); //update statistics

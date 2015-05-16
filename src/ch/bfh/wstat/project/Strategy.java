@@ -53,9 +53,14 @@ public enum Strategy {
 	REAC {
 
 			/**
+			 * Probability to collaborate in the first round.
+			 */
+			public static final double PROBABILITY_INITAL = .6;
+
+			/**
 			 * Probability {@code p_CC} to collaborate if the other player collaborated in last round.
 			 */
-			public static final double PROBABILITY_COLLABORATED = .60;
+			public static final double PROBABILITY_COLLABORATED = .6;
 
 			/**
 			 * Probability {@code p_CD} to collaborate if the other player deceived in last round.
@@ -67,7 +72,14 @@ public enum Strategy {
 			 */
 			@Override
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-				throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+
+				double p;
+				if (otherPlayer.getNumberOfRounds() == 0)
+					p = PROBABILITY_INITAL;
+				else
+					p = otherPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COLLABORATED : PROBABILITY_DECEIVED;
+
+				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
 		},
 
@@ -78,9 +90,14 @@ public enum Strategy {
 	ALTE {
 
 			/**
+			 * Probability to collaborate in the first round.
+			 */
+			public static final double PROBABILITY_INITAL = .6;
+
+			/**
 			 * Probability {@code p_CC} to collaborate if the player collaborated in last round as well.
 			 */
-			public static final double PROBABILITY_COLLABORATED = .40;
+			public static final double PROBABILITY_COLLABORATED = .4;
 
 			/**
 			 * Probability {@code p_CD} to collaborate if the player deceived in last round.
@@ -92,7 +109,14 @@ public enum Strategy {
 			 */
 			@Override
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-				throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+
+				double p;
+				if (otherPlayer.getNumberOfRounds() == 0)
+					p = PROBABILITY_INITAL;
+				else
+					p = otherPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COLLABORATED : PROBABILITY_DECEIVED;
+
+				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
 		},
 
@@ -103,16 +127,39 @@ public enum Strategy {
 	WIN {
 
 			/**
+			 * Probability to collaborate in the first round.
+			 */
+			public static final double PROBABILITY_INITAL = .6;
+
+			/**
+			 * Probability {@code p_R} to collaborate if the player won more than the other player in last round.
+			 */
+			public static final double PROBABILITY_WON = .6;
+
+			/**
+			 * Probability to collaborate if the player won less than the other player in last round.
+			 */
+			public static final double PROBABILITY_LOST = .35;
+
+			/**
 			 * {@inheritDoc}
 			 */
 			@Override
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-				throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+
+				double p;
+				if (currentPlayer.getNumberOfRounds() == 0 || otherPlayer.getNumberOfRounds() == 0)
+					p = PROBABILITY_INITAL;
+				else
+					p = currentPlayer.getRound(-1).getGain().compareTo(otherPlayer.getRound(-1).getGain()) > 0 ? PROBABILITY_WON : PROBABILITY_LOST;
+
+				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
 		},
 
 	/**
-	 * Our own strategy.
+	 * Our own strategy. <br>
+	 * Not implemented yet.
 	 */
 	OWN {
 
@@ -122,6 +169,21 @@ public enum Strategy {
 			@Override
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
 				throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+			}
+		},
+
+	/**
+	 * Deception strategy. <br>
+	 * Never collaborate.
+	 */
+	DECV {
+
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+				return Move.DECEIVE;
 			}
 		};
 

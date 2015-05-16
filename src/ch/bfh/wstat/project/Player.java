@@ -13,7 +13,7 @@ public class Player {
 
 	private final Strategy strategy;
 
-	private final ArrayList<RoundInformation> history = new ArrayList<>();
+	private final ArrayList<Round> rounds = new ArrayList<>();
 	private BigDecimal totalGain = BigDecimal.ZERO;
 
 	/**
@@ -27,15 +27,43 @@ public class Player {
 	}
 
 	/**
+	 * Get the number of rounds this player has played already.
+	 *
+	 * @return number of rounds this player has played already
+	 */
+	public int getNumberOfRounds() {
+		return this.rounds.size();
+	}
+
+	/**
+	 * Get information about a specific round.
+	 *
+	 * @param index index of the round if {@code index >= 0}, or nth to last round if {@code index < 0}
+	 *
+	 * @return information about the specified round
+	 *
+	 * @throws IndexOutOfBoundsException if the index is out of bounds
+	 */
+	public Round getRound(int index) {
+
+		return this.rounds.get(index >= 0 ? index : this.rounds.size() + index);
+	}
+
+	/**
 	 * Add the round's move and gain the player's history.
 	 *
 	 * @param move this round's move
 	 * @param gain gain the move resulted in
+	 *
+	 * @return information about the added round
 	 */
-	public void updateHistory(Move move, BigDecimal gain) {
+	public Round addRound(Move move, BigDecimal gain) {
 
-		this.history.add(new RoundInformation(move, gain));
+		Round r = new Round(this.rounds.size(), this, move, gain);
 		this.totalGain = this.totalGain.add(gain);
+
+		this.rounds.add(r);
+		return r;
 	}
 
 	/**
@@ -62,6 +90,6 @@ public class Player {
 	 * @return player's middle gain during the rounds already played
 	 */
 	public BigDecimal getMiddleGain() {
-		return this.totalGain.divide(BigDecimal.valueOf(this.history.size()), MathContext.DECIMAL128);
+		return this.totalGain.divide(BigDecimal.valueOf(this.rounds.size()), MathContext.DECIMAL128);
 	}
 }
