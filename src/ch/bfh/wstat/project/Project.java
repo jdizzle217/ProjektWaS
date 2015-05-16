@@ -62,6 +62,8 @@ public class Project {
 
 					System.out.print("Please enter a positive number: "); //if the user entered an invalid string, show a message and try again
 				}
+
+				System.out.println();
 			}
 
 		new Project().playGame(strategies[0], strategies[1], rounds); //create an object and play the game
@@ -86,7 +88,7 @@ public class Project {
 	 */
 	public void playGame(Strategy strategy1, Strategy strategy2, int rounds) {
 
-		System.out.println("\nGAME INFORMATION:"); //print information about the game
+		System.out.println("GAME INFORMATION:"); //print information about the game
 		System.out.printf("player 1 follows strategy %d (%s)%n", strategy1.ordinal(), strategy1.name());
 		System.out.printf("player 2 follows strategy %d (%s)%n", strategy2.ordinal(), strategy2.name());
 		System.out.printf("game will be played over %,d rounds%n", rounds);
