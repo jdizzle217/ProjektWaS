@@ -8,12 +8,12 @@ package ch.bfh.wstat.project;
 public enum Move {
 
 	/**
-	 * Co-operate with other player.
-	 */
-	COOPERATE,
-
-	/**
 	 * Deceive other player.
 	 */
-	DECEIVE
+	DECEIVE,
+
+	/**
+	 * Co-operate with other player.
+	 */
+	COOPERATE
 }

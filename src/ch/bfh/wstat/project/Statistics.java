@@ -10,10 +10,6 @@ public class Statistics {
 	private int total = 0;
 	private final int[][] events = {{0, 0}, {0, 0}};
 
-	private int getIndex(Move move) {
-		return move == Move.COOPERATE ? 1 : 0;
-	}
-
 	/**
 	 * Get the (absolute) frequency of a specific event. <br>
 	 * The event is defined by the moves of players 1 and 2.
@@ -25,7 +21,7 @@ public class Statistics {
 	 */
 	public int getEventFrequency(Move move1, Move move2) {
 
-		return this.events[this.getIndex(move1)][this.getIndex(move2)];
+		return this.events[move1.ordinal()][move2.ordinal()];
 	}
 
 	/**
@@ -38,7 +34,7 @@ public class Statistics {
 	public void incrementEventFrequency(Move move1, Move move2) {
 
 		this.total++;
-		this.events[this.getIndex(move1)][this.getIndex(move2)]++;
+		this.events[move1.ordinal()][move2.ordinal()]++;
 	}
 
 	/**
