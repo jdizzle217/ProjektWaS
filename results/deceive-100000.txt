@@ -5,13 +5,13 @@ game will be played over 100,000 rounds
 
 GAME STATISTICS:
 (1, 1):       0 time(s) -   0.0%
-(1, 0):  50,078 time(s) -  50.1%
-(0, 1):       0 time(s) -   0.0%
-(0, 0):  49,922 time(s) -  49.9%
+(1, 0):       0 time(s) -   0.0%
+(0, 1):  49,788 time(s) -  49.8%
+(0, 0):  50,212 time(s) -  50.2%
 total:  100,000 time(s)
 
 PLAYER STATISTICS:
           total gain | middle gain
-player 1: 300,312.00 |        3.00
-player 2:  49,922.00 |        0.50
-total:    350,234.00 |        3.50
+player 1: 299,152.00 |        2.99
+player 2:  50,212.00 |        0.50
+total:    349,364.00 |        3.49

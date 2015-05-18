@@ -4,14 +4,14 @@ player 2 follows strategy 0 (RAND)
 game will be played over 100,000 rounds
 
 GAME STATISTICS:
-(1, 1):  19,864 time(s) -  19.9%
-(1, 0):  29,996 time(s) -  30.0%
-(0, 1):  20,109 time(s) -  20.1%
-(0, 0):  30,031 time(s) -  30.0%
+(1, 1):  19,676 time(s) -  19.7%
+(1, 0):  20,238 time(s) -  20.2%
+(0, 1):  29,837 time(s) -  29.8%
+(0, 0):  30,249 time(s) -  30.2%
 total:  100,000 time(s)
 
 PLAYER STATISTICS:
           total gain | middle gain
-player 1: 239,603.00 |        2.40
-player 2: 190,168.00 |        1.90
-total:    429,771.00 |        4.30
+player 1: 238,462.00 |        2.38
+player 2: 190,467.00 |        1.90
+total:    428,929.00 |        4.29
