@@ -103,8 +103,8 @@ public class Project {
 
 		System.out.println("\nGAME STATISTICS:"); //print information about the game
 		System.out.printf("(1, 1): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.COOPERATE, Move.COOPERATE), statistics.getEventRelativeFrequency(Move.COOPERATE, Move.COOPERATE) * 100.);
-		System.out.printf("(1, 0): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.DECEIVE, Move.COOPERATE), statistics.getEventRelativeFrequency(Move.DECEIVE, Move.COOPERATE) * 100.);
-		System.out.printf("(0, 1): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.COOPERATE, Move.DECEIVE), statistics.getEventRelativeFrequency(Move.COOPERATE, Move.DECEIVE) * 100.);
+		System.out.printf("(1, 0): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.COOPERATE, Move.DECEIVE), statistics.getEventRelativeFrequency(Move.COOPERATE, Move.DECEIVE) * 100.);
+		System.out.printf("(0, 1): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.DECEIVE, Move.COOPERATE), statistics.getEventRelativeFrequency(Move.DECEIVE, Move.COOPERATE) * 100.);
 		System.out.printf("(0, 0): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.DECEIVE, Move.DECEIVE), statistics.getEventRelativeFrequency(Move.DECEIVE, Move.DECEIVE) * 100.);
 		System.out.printf("total: %,8d time(s)%n", rounds);
 
