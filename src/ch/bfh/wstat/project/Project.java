@@ -99,18 +99,20 @@ public class Project {
 		Game game = new Game(player1, player2, rounds); //create the game
 		game.playRounds(); //play all rounds
 
-		Statistics statistics = game.getStatistics(); //get the statistics
+		Statistics statistics = game.getStatistics(); //get the statistics to display
+		Move[] moves = {Move.COOPERATE, Move.DECEIVE}; //create an array of the moves in the desired display order
 
 		System.out.println("\nGAME STATISTICS:"); //print information about the game
-		System.out.printf("(1, 1): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.COOPERATE, Move.COOPERATE), statistics.getEventRelativeFrequency(Move.COOPERATE, Move.COOPERATE) * 100.);
-		System.out.printf("(1, 0): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.COOPERATE, Move.DECEIVE), statistics.getEventRelativeFrequency(Move.COOPERATE, Move.DECEIVE) * 100.);
-		System.out.printf("(0, 1): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.DECEIVE, Move.COOPERATE), statistics.getEventRelativeFrequency(Move.DECEIVE, Move.COOPERATE) * 100.);
-		System.out.printf("(0, 0): %,7d time(s) - %5.1f%%%n", statistics.getEventFrequency(Move.DECEIVE, Move.DECEIVE), statistics.getEventRelativeFrequency(Move.DECEIVE, Move.DECEIVE) * 100.);
+		for (Move m: moves)
+			for (Move n: moves)
+				System.out.printf("(%d, %d): %,7d time(s) - %5.1f%%%n", m.ordinal(), n.ordinal(), statistics.getEventFrequency(m, n), statistics.getEventRelativeFrequency(m, n) * 100.);
 		System.out.printf("total: %,8d time(s)%n", rounds);
 
+		Player[] players = {player1, player2}; //create an array of the players to display information about
+
 		System.out.println("\nPLAYER STATISTICS:\n          total gain | middle gain"); //print information about the individual players
-		System.out.printf("player 1: %,10.2f | %,11.2f%n", player1.getTotalGain(), player1.getMiddleGain());
-		System.out.printf("player 2: %,10.2f | %,11.2f%n", player2.getTotalGain(), player2.getMiddleGain());
+		for (int i = 0; i < 2; i++)
+			System.out.printf("player %d: %,10.2f | %,11.2f%n", i + 1, players[i].getTotalGain(), players[i].getMiddleGain());
 		System.out.printf("total: %,13.2f | %,11.2f%n", game.getTotalGain(), game.getMiddleGain());
 	}
 }
