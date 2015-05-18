@@ -55,7 +55,7 @@ public enum Strategy {
 			/**
 			 * Probability to co-operate in the first round.
 			 */
-			public static final double PROBABILITY_INITAL = .6;
+			public static final double PROBABILITY_INITAL = .5;
 
 			/**
 			 * Probability {@code p_CC} to co-operate if the other player co-operated in last round.
@@ -92,7 +92,7 @@ public enum Strategy {
 			/**
 			 * Probability to co-operate in the first round.
 			 */
-			public static final double PROBABILITY_INITAL = .6;
+			public static final double PROBABILITY_INITAL = .5;
 
 			/**
 			 * Probability {@code p_CC} to co-operate if the player co-operated in last round as well.
@@ -129,7 +129,7 @@ public enum Strategy {
 			/**
 			 * Probability to co-operate in the first round.
 			 */
-			public static final double PROBABILITY_INITAL = .6;
+			public static final double PROBABILITY_INITAL = .5;
 
 			/**
 			 * Probability {@code p_R} to co-operate if the player won more than the other player in last round.
