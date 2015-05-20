@@ -111,10 +111,10 @@ public enum Strategy {
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
 
 				double p;
-				if (otherPlayer.getNumberOfRounds() == 0)
+				if (currentPlayer.getNumberOfRounds() == 0)
 					p = PROBABILITY_INITAL;
 				else
-					p = otherPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COOPERATED : PROBABILITY_DECEIVED;
+					p = currentPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COOPERATED : PROBABILITY_DECEIVED;
 
 				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
