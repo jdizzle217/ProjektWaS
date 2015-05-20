@@ -188,7 +188,7 @@ public enum Strategy {
 		},
 
 	/**
-	 * Deception strategy. <br>
+	 * Optimised probability (deception) strategy. <br>
 	 * Never co-operate.
 	 */
 	DECV {
@@ -199,6 +199,43 @@ public enum Strategy {
 			@Override
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
 				return Move.DECEIVE;
+			}
+		},
+
+	/**
+	 * Optimised reaction strategy. <br>
+	 * Co-operate with a probability {@code p_CC} if the other player co-operated in the last round and with a probability {@code p_CD} if he deceived.
+	 */
+	REAO {
+
+			/**
+			 * Probability to co-operate in the first round.
+			 */
+			public static final double PROBABILITY_INITAL = .5;
+
+			/**
+			 * Probability {@code p_CC} to co-operate if the other player co-operated in last round.
+			 */
+			public static final double PROBABILITY_COOPERATED = .6;
+
+			/**
+			 * Probability {@code p_CD} to co-operate if the other player deceived in last round.
+			 */
+			public static final double PROBABILITY_DECEIVED = 0;
+
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+
+				double p;
+				if (otherPlayer.getNumberOfRounds() == 0)
+					p = PROBABILITY_INITAL;
+				else
+					p = otherPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COOPERATED : PROBABILITY_DECEIVED;
+
+				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
 		};
 
