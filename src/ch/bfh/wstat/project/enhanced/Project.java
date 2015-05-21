@@ -35,7 +35,7 @@ public class Project {
 			try (Scanner in = new Scanner(System.in)) { //create a scanner to read from the console
 				System.out.println("Please choose the player's strategies.\nYou have the following options:");
 				for (Strategy stg: Strategy.values()) //display the strategy ordinals & numbers
-					System.out.printf(">%d: %s%n", stg.ordinal(), stg.name());
+					System.out.printf(">%d: %s%n", stg.ordinal() + 1, stg.name());
 				System.out.println();
 
 				for (int i = 0; i < strategies.length; i++) { //read strategies for players 1 & 2
@@ -72,7 +72,7 @@ public class Project {
 	private static Strategy recogniseStrategy(String name) {
 
 		try {
-			return Strategy.values()[Integer.parseInt(name)]; //try to parse the string to a number and retreive the strategy
+			return Strategy.values()[Integer.parseInt(name) - 1]; //try to parse the string to a number and retreive the strategy
 
 		} catch (NumberFormatException ex) { //if the user did not specify a number, try to find a strategy with the specified name
 			return Arrays.stream(Strategy.values()).filter(s -> s.name().equalsIgnoreCase(name)).findAny().get();
@@ -89,8 +89,8 @@ public class Project {
 	public void playGame(Strategy strategy1, Strategy strategy2, int rounds) {
 
 		System.out.println("GAME INFORMATION:"); //print information about the game
-		System.out.printf("player 1 follows strategy %d (%s)%n", strategy1.ordinal(), strategy1.name());
-		System.out.printf("player 2 follows strategy %d (%s)%n", strategy2.ordinal(), strategy2.name());
+		System.out.printf("player 1 follows strategy %d (%s)%n", strategy1.ordinal() + 1, strategy1.name());
+		System.out.printf("player 2 follows strategy %d (%s)%n", strategy2.ordinal() + 1, strategy2.name());
 		System.out.printf("game will be played over %,d rounds%n", rounds);
 
 		Player player1 = new Player(strategy1); //create the two players
