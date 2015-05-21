@@ -1,6 +1,6 @@
 GAME INFORMATION:
-player 1 follows strategy 8 (REAO)
-player 2 follows strategy 7 (DECV)
+player 1 follows strategy 9 (REAO)
+player 2 follows strategy 8 (DECV)
 game will be played over 10,000 rounds
 
 GAME STATISTICS:

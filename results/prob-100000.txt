@@ -1,6 +1,6 @@
 GAME INFORMATION:
-player 1 follows strategy 1 (PROB)
-player 2 follows strategy 0 (RAND)
+player 1 follows strategy 2 (PROB)
+player 2 follows strategy 1 (RAND)
 game will be played over 100,000 rounds
 
 GAME STATISTICS:
