@@ -6,9 +6,9 @@ package ch.bfh.wstat.project.legacy;
 public class Statistics {
 
 	public static int CooperateCooperate = 0;
-	public static int DeceiveCooperate = 0;
-	public static int CooperateDeceive = 0;
-	public static int DeceiveDeceive = 0;
+	public static int DefectCooperate = 0;
+	public static int CooperateDefect = 0;
+	public static int DefectDefect = 0;
 
 //*** START OF MODIFIED CODE FRAGMENT ***
 	public static float Gain = 0.f;
@@ -18,16 +18,16 @@ public class Statistics {
 		return (double)CooperateCooperate / Rounds;
 	}
 
-	public static double getRelativeFrequencyDeceiveCooperate() {
-		return (double)DeceiveCooperate / Rounds;
+	public static double getRelativeFrequencyDefectCooperate() {
+		return (double)DefectCooperate / Rounds;
 	}
 
-	public static double getRelativeFrequencyCooperateDeceive() {
-		return (double)CooperateDeceive / Rounds;
+	public static double getRelativeFrequencyCooperateDefect() {
+		return (double)CooperateDefect / Rounds;
 	}
 
-	public static double getRelativeFrequencyDeceiveDeceive() {
-		return (double)DeceiveDeceive / Rounds;
+	public static double getRelativeFrequencyDefectDefect() {
+		return (double)DefectDefect / Rounds;
 	}
 
 	public static double getMiddleGain() {

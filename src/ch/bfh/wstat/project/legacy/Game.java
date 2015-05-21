@@ -7,9 +7,9 @@ public class Game {
 
 	//possible gain
 	static float GAIN_COL = 3; // gain for mutual collaboration
-	static float GAIN_TEM = 5; // gain for deception when other players collaborates
-	static float GAIN_LOS = 0; // gain for collaboration when other players deceives
-	static float GAIN_DEC = 1; // gain for mutual deception
+	static float GAIN_TEM = 5; // gain for defection when other players collaborates
+	static float GAIN_LOS = 0; // gain for collaboration when other players defects
+	static float GAIN_DEF = 1; // gain for mutual defection
 
 	//two players
 	Player Player1, Player2;
@@ -37,22 +37,22 @@ public class Game {
 				//System.out.printf("Mutual collaboration\n");
 
 			} else { // player1 loses (S,T)
-				Statistics.CooperateDeceive++;
+				Statistics.CooperateDefect++;
 				Player1.update(GAIN_LOS, nGame);
 				Player2.update(GAIN_TEM, nGame);
 				//System.out.printf("Player 1 loses\n");
 			}
 
 		else if (Player2.PlayerCurrentMove == Strategy.COOPERATE) { // player2 loses (T,S)
-			Statistics.DeceiveCooperate++;
+			Statistics.DefectCooperate++;
 			Player1.update(GAIN_TEM, nGame);
 			Player2.update(GAIN_LOS, nGame);
 			//System.out.printf("Player 2 loses\n");
 
-		} else { // mutual deception (P,P)
-			Statistics.DeceiveDeceive++;
-			Player1.update(GAIN_DEC, nGame);
-			Player2.update(GAIN_DEC, nGame);
+		} else { // mutual defection (P,P)
+			Statistics.DefectDefect++;
+			Player1.update(GAIN_DEF, nGame);
+			Player2.update(GAIN_DEF, nGame);
 			//System.out.printf("Mutual defection\n");
 		}
 

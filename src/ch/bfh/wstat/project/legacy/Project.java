@@ -42,9 +42,9 @@ public class Project {
 //*** START OF MODIFIED CODE FRAGMENT ***
 		System.out.println("\nGAME STATISTICS:"); //print information about the game
 		System.out.printf("(1, 1): %,7d time(s) - %5.1f%%%n", Statistics.CooperateCooperate, Statistics.getRelativeFrequencyCooperateCooperate() * 100.);
-		System.out.printf("(1, 0): %,7d time(s) - %5.1f%%%n", Statistics.CooperateDeceive, Statistics.getRelativeFrequencyCooperateDeceive() * 100.);
-		System.out.printf("(0, 1): %,7d time(s) - %5.1f%%%n", Statistics.DeceiveCooperate, Statistics.getRelativeFrequencyDeceiveCooperate() * 100.);
-		System.out.printf("(0, 0): %,7d time(s) - %5.1f%%%n", Statistics.DeceiveDeceive, Statistics.getRelativeFrequencyDeceiveDeceive() * 100.);
+		System.out.printf("(1, 0): %,7d time(s) - %5.1f%%%n", Statistics.CooperateDefect, Statistics.getRelativeFrequencyCooperateDefect() * 100.);
+		System.out.printf("(0, 1): %,7d time(s) - %5.1f%%%n", Statistics.DefectCooperate, Statistics.getRelativeFrequencyDefectCooperate() * 100.);
+		System.out.printf("(0, 0): %,7d time(s) - %5.1f%%%n", Statistics.DefectDefect, Statistics.getRelativeFrequencyDefectDefect() * 100.);
 		System.out.printf("total: %,8d time(s)%n", Statistics.Rounds);
 
 		System.out.println("\nPLAYER STATISTICS:\n          total gain | middle gain"); //print information about the individual players
