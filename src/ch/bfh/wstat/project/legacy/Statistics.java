@@ -13,7 +13,7 @@ public class Statistics {
 //*** START OF MODIFIED CODE FRAGMENT ***
 	public static float Gain = 0.f; //variable for total gain (initialised to zero)
 
-	public static double getNumberOfRounds() { //calculate the number of rounds by adding the frequencies of the different events
+	public static int getNumberOfRounds() { //calculate the number of rounds by adding the frequencies of the different events
 		return CooperateCooperate + DefectCooperate + CooperateDefect + DefectDefect;
 	}
 

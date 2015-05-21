@@ -1,0 +1,17 @@
+GAME INFORMATION:
+player 1 follows strategy 6 (OWN)
+player 2 follows strategy 8 (DECV)
+game will be played over 100,000 rounds
+
+GAME STATISTICS:
+(1, 1):       0 time(s) -   0.0%
+(1, 0):   3,032 time(s) -   3.0%
+(0, 1):       0 time(s) -   0.0%
+(0, 0):  96,968 time(s) -  97.0%
+total:  100,000 time(s)
+
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1:  96,968.00 |        0.97
+player 2: 112,128.00 |        1.12
+total:    209,096.00 |        2.09

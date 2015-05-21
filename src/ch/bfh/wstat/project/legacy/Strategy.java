@@ -8,8 +8,7 @@ package ch.bfh.wstat.project.legacy;
  * 3 - ALT      = collaborate with probability p_CC if he has collaborated the last turn and with a probability p_CD if he has defected.
  * 4 - REAC     = collaborate with probability p_CC if the other player has collaborated the last turn and with a probability p_CD if he has defected.
  * 5 - WIN      = redo same action with probability p_R if he has won more than the other player the last turn
- * 6 - OWN      = *describe here your own strategy*
- * 7 - PROB_COP = always cooperate
+ * 6 - OWN      = collaborate with a high probability if the player gained more than the competitor in the majority of the last rounds
  * 8 - PROB_OPT = always defect = optimised PROP when competing against RAND
  * 9 - REAC_OPT = optimised REAC when competing against PROB_OPT
  */
@@ -24,8 +23,7 @@ public class Strategy {
 	final public static int OWN = 6;
 
 //*** START OF MODIFIED CODE FRAGMENT ***
-	final public static int PROB_COP = 7; //constants for additional strategies
-	final public static int PROB_OPT = 8;
+	final public static int PROB_OPT = 8; //constants for optimised strategies
 	final public static int REAC_OPT = 9;
 //*** END OF MODIFIED CODE FRAGMENT ***
 
@@ -85,7 +83,15 @@ public class Strategy {
 				break;
 
 			case OWN:
-
+				int ttl = Math.min(7, nGame); //determine the number of rounds to analyse
+				int won = 0; //count the number of won rounds
+				for (int i = 0; i < ttl; i++) {
+					float curGin = Player1.GainHistory[nGame - i - 1]; //fetch the gains of both the current player and the competitor
+					float othGin = Player2.GainHistory[nGame - i - 1];
+					if (curGin / (curGin + othGin) > .53f) //count round as a win if won more than 53% percent of the round's total gain
+						won++;
+				}
+				Move = (int)(Math.random() + ((double)won / ttl > .53 ? .93 : .03)); //co-operate with a high probability if won the majority of analysed rounds
 				break;
 //*** END OF MODIFIED CODE FRAGMENT ***
 

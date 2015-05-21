@@ -1,5 +1,6 @@
 package ch.bfh.wstat.project.enhanced;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 /**
@@ -12,7 +13,8 @@ public enum Strategy {
 	/**
 	 * Random strategy. <br>
 	 * Co-operate with a probability of 50%.
-	 *//**
+	 */
+	/**
 	 * Random strategy. <br>
 	 * Co-operate with a probability of 50%.
 	 */
@@ -135,14 +137,9 @@ public enum Strategy {
 			public static final double PROBABILITY_INITAL = .5;
 
 			/**
-			 * Probability {@code p_R} to co-operate if the player won more than the other player in last round.
+			 * Probability {@code p_R} to repeat the last action if the player won more than the other player in last round.
 			 */
 			public static final double PROBABILITY_WON = .6;
-
-			/**
-			 * Probability to co-operate if the player won less than the other player in last round.
-			 */
-			public static final double PROBABILITY_LOST = .35;
 
 			/**
 			 * {@inheritDoc}
@@ -151,10 +148,11 @@ public enum Strategy {
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
 
 				double p;
-				if (currentPlayer.getNumberOfRounds() == 0 || otherPlayer.getNumberOfRounds() == 0)
-					p = PROBABILITY_INITAL;
+				if (currentPlayer.getNumberOfRounds() > 0 && otherPlayer.getNumberOfRounds() > 0
+						&& currentPlayer.getRound(-1).getGain().compareTo(otherPlayer.getRound(-1).getGain()) > 0)
+					p = currentPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_WON : 1. - PROBABILITY_WON;
 				else
-					p = currentPlayer.getRound(-1).getGain().compareTo(otherPlayer.getRound(-1).getGain()) > 0 ? PROBABILITY_WON : PROBABILITY_LOST;
+					p = PROBABILITY_INITAL;
 
 				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
@@ -162,16 +160,50 @@ public enum Strategy {
 
 	/**
 	 * Our own strategy. <br>
-	 * Not implemented yet.
+	 * Co-operate with a high probability if the player gained more than the competitor in the majority of the last rounds.
 	 */
 	OWN {
+
+			/**
+			 * Number of rounds to analyse.
+			 */
+			public static final int HISTORY_COUNT = 7;
+
+			/**
+			 * Threshold when to consider a (number of) round(s) to be won.
+			 */
+			public static final String THRESHOLD_WON = ".53";
+			private final BigDecimal THRESHOLD_WON_BIG_DECIMAL = new BigDecimal(THRESHOLD_WON);
+
+			/**
+			 * Probability to co-operate if the player won more (often) than the other player.
+			 */
+			public static final double PROBABILITY_WON = .93;
+
+			/**
+			 * Probability to co-operate if the player won less (often) than the other player.
+			 */
+			public static final double PROBABILITY_LOST = .03;
 
 			/**
 			 * {@inheritDoc}
 			 */
 			@Override
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-				throw new UnsupportedOperationException("Strategy not yet implemented."); //TODO: implement strategy
+
+				int ttl = Math.min(HISTORY_COUNT, Math.min(currentPlayer.getNumberOfRounds(), otherPlayer.getNumberOfRounds()));
+				int won = 0;
+				for (int i = 0; i < ttl; i++) {
+					BigDecimal curGin = currentPlayer.getRound(-i - 1).getGain();
+					BigDecimal othGin = otherPlayer.getRound(-i - 1).getGain();
+					if (curGin.divide(curGin.add(othGin)).compareTo(this.THRESHOLD_WON_BIG_DECIMAL) > 0)
+						won++;
+				}
+
+				double p = (double)won / ttl > this.THRESHOLD_WON_BIG_DECIMAL.doubleValue() ? PROBABILITY_WON : PROBABILITY_LOST;
+//			if (currentPlayer.getNumberOfRounds() > 0 && currentPlayer.getRound(- 1).getMove() != Move.COOPERATE)
+//				p = 1 - p;
+				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
 		},
 

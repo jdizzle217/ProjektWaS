@@ -1,0 +1,17 @@
+GAME INFORMATION:
+player 1 follows strategy 6 (OWN)
+player 2 follows strategy 1 (RAND)
+game will be played over 100,000 rounds
+
+GAME STATISTICS:
+(1, 1):  11,255 time(s) -  11.3%
+(1, 0):  11,169 time(s) -  11.2%
+(0, 1):  38,958 time(s) -  39.0%
+(0, 0):  38,618 time(s) -  38.6%
+total:  100,000 time(s)
+
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1: 267,173.00 |        2.67
+player 2: 128,228.00 |        1.28
+total:    395,401.00 |        3.95

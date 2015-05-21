@@ -1,0 +1,17 @@
+GAME INFORMATION:
+player 1 follows strategy 6 (OWN)
+player 2 follows strategy 4 (REAC)
+game will be played over 100,000 rounds
+
+GAME STATISTICS:
+(1, 1):   6,187 time(s) -   6.2%
+(1, 0):   8,174 time(s) -   8.2%
+(0, 1):  32,796 time(s) -  32.8%
+(0, 0):  52,843 time(s) -  52.8%
+total:  100,000 time(s)
+
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1: 235,384.00 |        2.35
+player 2: 112,274.00 |        1.12
+total:    347,658.00 |        3.48
