@@ -57,9 +57,7 @@ public class Game {
 		}
 
 //*** START OF MODIFIED CODE FRAGMENT ***
-		Statistics.Gain += Player1.GainHistory[nGame];
-		Statistics.Gain += Player2.GainHistory[nGame];
-		Statistics.Rounds++;
+		Statistics.Gain += Player1.GainHistory[nGame] + Player2.GainHistory[nGame]; //add the two player's gain to the total gain
 //*** END OF MODIFIED CODE FRAGMENT ***
 	}
 }

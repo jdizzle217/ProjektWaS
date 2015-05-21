@@ -45,13 +45,13 @@ public class Project {
 		System.out.printf("(1, 0): %,7d time(s) - %5.1f%%%n", Statistics.CooperateDefect, Statistics.getRelativeFrequencyCooperateDefect() * 100.);
 		System.out.printf("(0, 1): %,7d time(s) - %5.1f%%%n", Statistics.DefectCooperate, Statistics.getRelativeFrequencyDefectCooperate() * 100.);
 		System.out.printf("(0, 0): %,7d time(s) - %5.1f%%%n", Statistics.DefectDefect, Statistics.getRelativeFrequencyDefectDefect() * 100.);
-		System.out.printf("total: %,8d time(s)%n", Statistics.Rounds);
+		System.out.printf("total: %,8d time(s)%n", Statistics.getNumberOfRounds());
 
-		System.out.println("\nPLAYER STATISTICS:\n          total gain | middle gain"); //print information about the individual players
 		Player[] players = {Player1, Player2}; //create an array of the players to display information about
+		System.out.println("\nPLAYER STATISTICS:\n          total gain | middle gain"); //print information about the individual players
 		for (int i = 0; i < players.length; i++)
 			System.out.printf("player %d: %,10.2f | %,11.2f%n", i + 1, players[i].Gain, players[i].MiddleGain);
-		System.out.printf("total: %,13.2f | %,11.2f%n", Statistics.Gain, Statistics.getMiddleGain());
+		System.out.printf("total: %,13.2f | %,11.2f%n", Statistics.Gain, Statistics.getMiddleGain()); //print cumulated information
 //*** END OF MODIFIED CODE FRAGMENT ***
 	}
 }

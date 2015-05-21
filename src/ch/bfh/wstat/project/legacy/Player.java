@@ -12,7 +12,7 @@ public class Player {
 	float[] GainHistory;
 
 //*** START OF MODIFIED CODE FRAGMENT ***
-	float Gain = 0.f, MiddleGain = 0.f;
+	float Gain = 0.f, MiddleGain = 0.f; //variables for total and middle gain (initialised to zero)
 //*** END OF MODIFIED CODE FRAGMENT ***
 
 	//constructor
@@ -30,8 +30,8 @@ public class Player {
 		GainHistory[nGame] = Gain;
 
 //*** START OF MODIFIED CODE FRAGMENT ***
-		this.Gain += Gain;
-		MiddleGain = this.Gain / (nGame + 1);
+		this.Gain += Gain; //sum the total gain
+		MiddleGain = this.Gain / (nGame + 1); //calculate the middle gain up to the current round
 //*** END OF MODIFIED CODE FRAGMENT ***
 	}
 }
