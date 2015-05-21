@@ -111,7 +111,7 @@ public class Project {
 		Player[] players = {player1, player2}; //create an array of the players to display information about
 
 		System.out.println("\nPLAYER STATISTICS:\n          total gain | middle gain"); //print information about the individual players
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < players.length; i++)
 			System.out.printf("player %d: %,10.2f | %,11.2f%n", i + 1, players[i].getTotalGain(), players[i].getMiddleGain());
 		System.out.printf("total: %,13.2f | %,11.2f%n", game.getTotalGain(), game.getMiddleGain());
 	}
