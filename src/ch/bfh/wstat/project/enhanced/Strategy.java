@@ -12,6 +12,9 @@ public enum Strategy {
 	/**
 	 * Random strategy. <br>
 	 * Co-operate with a probability of 50%.
+	 *//**
+	 * Random strategy. <br>
+	 * Co-operate with a probability of 50%.
 	 */
 	RAND {
 
@@ -47,6 +50,43 @@ public enum Strategy {
 		},
 
 	/**
+	 * Alternating strategy. <br>
+	 * Co-operate with a probability {@code p_CC} if the player also co-operated in the last round and with a probability {@code p_CD} if he deceived.
+	 */
+	ALT {
+
+			/**
+			 * Probability to co-operate in the first round.
+			 */
+			public static final double PROBABILITY_INITAL = .5;
+
+			/**
+			 * Probability {@code p_CC} to co-operate if the player co-operated in last round as well.
+			 */
+			public static final double PROBABILITY_COOPERATED = .4;
+
+			/**
+			 * Probability {@code p_CD} to co-operate if the player deceived in last round.
+			 */
+			public static final double PROBABILITY_DECEIVED = .65;
+
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
+
+				double p;
+				if (currentPlayer.getNumberOfRounds() == 0)
+					p = PROBABILITY_INITAL;
+				else
+					p = currentPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COOPERATED : PROBABILITY_DECEIVED;
+
+				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
+			}
+		},
+
+	/**
 	 * Reaction strategy. <br>
 	 * Co-operate with a probability {@code p_CC} if the other player co-operated in the last round and with a probability {@code p_CD} if he deceived.
 	 */
@@ -78,43 +118,6 @@ public enum Strategy {
 					p = PROBABILITY_INITAL;
 				else
 					p = otherPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COOPERATED : PROBABILITY_DECEIVED;
-
-				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
-			}
-		},
-
-	/**
-	 * Alternating strategy. <br>
-	 * Co-operate with a probability {@code p_CC} if the player also co-operated in the last round and with a probability {@code p_CD} if he deceived.
-	 */
-	ALTE {
-
-			/**
-			 * Probability to co-operate in the first round.
-			 */
-			public static final double PROBABILITY_INITAL = .5;
-
-			/**
-			 * Probability {@code p_CC} to co-operate if the player co-operated in last round as well.
-			 */
-			public static final double PROBABILITY_COOPERATED = .4;
-
-			/**
-			 * Probability {@code p_CD} to co-operate if the player deceived in last round.
-			 */
-			public static final double PROBABILITY_DECEIVED = .65;
-
-			/**
-			 * {@inheritDoc}
-			 */
-			@Override
-			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
-
-				double p;
-				if (currentPlayer.getNumberOfRounds() == 0)
-					p = PROBABILITY_INITAL;
-				else
-					p = currentPlayer.getRound(-1).getMove() == Move.COOPERATE ? PROBABILITY_COOPERATED : PROBABILITY_DECEIVED;
 
 				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
