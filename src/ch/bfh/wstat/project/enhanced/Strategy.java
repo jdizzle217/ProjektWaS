@@ -202,8 +202,8 @@ public enum Strategy {
 					}
 
 					p = (double)won / ttl > this.THRESHOLD_WON_BIG_DECIMAL.doubleValue() ? PROBABILITY_WON : PROBABILITY_LOST;
-//			if (currentPlayer.getNumberOfRounds() > 0 && currentPlayer.getRound(- 1).getMove() != Move.COOPERATE)
-//				p = 1 - p;
+//				if (currentPlayer.getNumberOfRounds() > 0 && currentPlayer.getRound(- 1).getMove() != Move.COOPERATE)
+//					p = 1 - p;
 				}
 
 				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
