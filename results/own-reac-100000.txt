@@ -4,14 +4,14 @@ player 2 follows strategy 4 (REAC)
 game will be played over 100,000 rounds
 
 GAME STATISTICS:
-(1, 1):   6,187 time(s) -   6.2%
-(1, 0):   8,174 time(s) -   8.2%
-(0, 1):  32,796 time(s) -  32.8%
-(0, 0):  52,843 time(s) -  52.8%
+(1, 1):   6,031 time(s) -   6.0%
+(1, 0):   7,940 time(s) -   7.9%
+(0, 1):  32,362 time(s) -  32.4%
+(0, 0):  53,667 time(s) -  53.7%
 total:  100,000 time(s)
 
 PLAYER STATISTICS:
           total gain | middle gain
-player 1: 235,384.00 |        2.35
-player 2: 112,274.00 |        1.12
-total:    347,658.00 |        3.48
+player 1: 233,570.00 |        2.34
+player 2: 111,460.00 |        1.11
+total:    345,030.00 |        3.45

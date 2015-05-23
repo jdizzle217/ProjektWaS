@@ -4,14 +4,14 @@ player 2 follows strategy 3 (ALT)
 game will be played over 100,000 rounds
 
 GAME STATISTICS:
-(1, 1):  10,552 time(s) -  10.6%
-(1, 0):  12,412 time(s) -  12.4%
-(0, 1):  41,408 time(s) -  41.4%
-(0, 0):  35,628 time(s) -  35.6%
+(1, 1):  10,832 time(s) -  10.8%
+(1, 0):  12,427 time(s) -  12.4%
+(0, 1):  41,410 time(s) -  41.4%
+(0, 0):  35,331 time(s) -  35.3%
 total:  100,000 time(s)
 
 PLAYER STATISTICS:
           total gain | middle gain
-player 1: 274,324.00 |        2.74
-player 2: 129,344.00 |        1.29
-total:    403,668.00 |        4.04
+player 1: 274,877.00 |        2.75
+player 2: 129,962.00 |        1.30
+total:    404,839.00 |        4.05

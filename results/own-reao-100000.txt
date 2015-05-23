@@ -4,14 +4,14 @@ player 2 follows strategy 9 (REAO)
 game will be played over 100,000 rounds
 
 GAME STATISTICS:
-(1, 1):      54 time(s) -   0.1%
-(1, 0):   2,902 time(s) -   2.9%
-(0, 1):   1,761 time(s) -   1.8%
-(0, 0):  95,283 time(s) -  95.3%
+(1, 1):      65 time(s) -   0.1%
+(1, 0):   2,994 time(s) -   3.0%
+(0, 1):   1,795 time(s) -   1.8%
+(0, 0):  95,146 time(s) -  95.1%
 total:  100,000 time(s)
 
 PLAYER STATISTICS:
           total gain | middle gain
-player 1: 104,250.00 |        1.04
-player 2: 109,955.00 |        1.10
-total:    214,205.00 |        2.14
+player 1: 104,316.00 |        1.04
+player 2: 110,311.00 |        1.10
+total:    214,627.00 |        2.15
