@@ -188,17 +188,24 @@ public enum Strategy {
 			public Move determineNextMove(Player currentPlayer, Player otherPlayer) {
 
 				int ttl = Math.min(HISTORY_COUNT, Math.min(currentPlayer.getNumberOfRounds(), otherPlayer.getNumberOfRounds()));
-				int won = 0;
-				for (int i = 0; i < ttl; i++) {
-					BigDecimal curGin = currentPlayer.getRound(-i - 1).getGain();
-					BigDecimal othGin = otherPlayer.getRound(-i - 1).getGain();
-					if (curGin.divide(curGin.add(othGin)).compareTo(this.THRESHOLD_WON_BIG_DECIMAL) > 0)
-						won++;
-				}
+				double p;
 
-				double p = (double)won / ttl > this.THRESHOLD_WON_BIG_DECIMAL.doubleValue() ? PROBABILITY_WON : PROBABILITY_LOST;
+				if (ttl == 0)
+					p = PROBABILITY_WON;
+				else {
+					int won = 0;
+					for (int i = 0; i < ttl; i++) {
+						BigDecimal curGin = currentPlayer.getRound(-i - 1).getGain();
+						BigDecimal othGin = otherPlayer.getRound(-i - 1).getGain();
+						if (curGin.divide(curGin.add(othGin)).compareTo(this.THRESHOLD_WON_BIG_DECIMAL) > 0)
+							won++;
+					}
+
+					p = (double)won / ttl > this.THRESHOLD_WON_BIG_DECIMAL.doubleValue() ? PROBABILITY_WON : PROBABILITY_LOST;
 //			if (currentPlayer.getNumberOfRounds() > 0 && currentPlayer.getRound(- 1).getMove() != Move.COOPERATE)
 //				p = 1 - p;
+				}
+
 				return random.nextDouble() < p ? Move.COOPERATE : Move.DECEIVE;
 			}
 		},

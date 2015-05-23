@@ -84,14 +84,19 @@ public class Strategy {
 
 			case OWN:
 				int ttl = Math.min(7, nGame); //determine the number of rounds to analyse
-				int won = 0; //count the number of won rounds
-				for (int i = 0; i < ttl; i++) {
-					float curGin = Player1.GainHistory[nGame - i - 1]; //fetch the gains of both the current player and the competitor
-					float othGin = Player2.GainHistory[nGame - i - 1];
-					if (curGin / (curGin + othGin) > .53f) //count round as a win if won more than 53% percent of the round's total gain
-						won++;
+				if (ttl == 0)
+					p = .93;
+				else {
+					int won = 0; //count the number of won rounds
+					for (int i = 0; i < ttl; i++) {
+						float curGin = Player1.GainHistory[nGame - i - 1]; //fetch the gains of both the current player and the competitor
+						float othGin = Player2.GainHistory[nGame - i - 1];
+						if (curGin / (curGin + othGin) > .53f) //count round as a win if won more than 53% percent of the round's total gain
+							won++;
+					}
+					p = ((double)won / ttl > .53 ? .93 : .03);
 				}
-				Move = (int)(Math.random() + ((double)won / ttl > .53 ? .93 : .03)); //co-operate with a high probability if won the majority of analysed rounds
+				Move = (int)(Math.random() + p); //co-operate with a high probability if won the majority of analysed rounds
 				break;
 //*** END OF MODIFIED CODE FRAGMENT ***
 
