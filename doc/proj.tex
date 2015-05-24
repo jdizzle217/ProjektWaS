@@ -1,0 +1,141 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc} % encoding
+\usepackage{amsmath,amstext,amssymb, amsthm} % maths libraries
+\usepackage[francais, german]{babel} % language
+\usepackage{xifthen} %define new if 
+\usepackage[margin=2cm]{geometry}
+\setlength{\parindent}{0in}
+
+\begin{document}
+
+\hrule
+{\bfseries\large Projekt Wahrscheinlichkeit} \rule[-1.5ex]{0pt}{5ex}  \hfill {\bfseries\large Informatik}
+\hrule
+\vspace{5ex}
+
+\subsection*{Organisation} 
+
+In diesem Projekt werden verschiedene Konzepte, die Sie im Modul Wahrscheinlichkeit und Statistik gelernt haben, 
+angewendet. Ziel des Projekts ist es das intuitive Verständnis dieser Konzepte zu verbessern und an einer
+Anwendung der Wahrscheinlichkeitsrechnung zu arbeiten.\\
+
+Der Code wird in Java implementiert, ausgehend von Code, der zur Verfügung gestellt wird. Die modifizierten Abschnitte des Codes müssen hervorgehoben und kommentiert werden. Der Bericht wird in LaTeX auf der Grundlage dieses Dokuments erstellt.\\
+
+Die Arbeit wird in elektronischer Form abgegeben. Sie besteht aus einem Bericht im pdf-Format und entsprechenden Java-Dateien. Die Arbeit kann teilweise während den Unterrichtslektionen in Zweiergruppen erfolgen. Der
+Abgabetermin ist der \textbf{22. Mai 2015}.\\
+
+Die 10 Punkte, welche maximal für das Projekt erzielt werden können, setzen sich folgendermassen 
+zusammen:
+\begin{enumerate}
+\item[5P] Richtige Antworten zu den Fragen
+\item[3P] Qualität der Erklärungen
+\item[1P] Beherrschung der mathematischen Sprache
+\item[1P] Präsentation / Seitenlayout / Kommentare zum Code
+\end{enumerate} 
+
+Beachten Sie, dass es besonders wichtig ist, dass Sie Ihren Lösungsweg und Ihre Überlegungen erläutern. 
+Ihr Bericht muss für eine aussenstehende Person mit Grundkenntnissen in Wahrscheinlichkeitsrechnung verständlich sein.
+
+\subsection*{Erläuterung des Problems}
+
+Wir betrachten ein Spiel, an welchem zwei Spieler teilnehmen. Zwei Aktionen sind für beide Spieler möglich: sie können kooperieren (cooperate) (C) oder sie können betrügen (deceive) (D). Der Gewinn jedes Spielers hängt von der Aktion des andern Spielers ab, wie die Tabelle zeigt:
+$$\begin{array}{c | c | c}
+\text{Spieler 1 } \backslash \text{ Spieler 2} &  C & D \\
+\hline
+C &  (R,R) & (S,T) \\
+\hline
+D &  (T,S) & (P,P) \\
+\end{array}$$
+wobei R,S,T und P, die möglichen Gewinne des ersten bzw.\ des zweiten Spieler sind. Weiter gilt 
+$T > R > P > S$ und $2R > S+T$. Zum Beispiel:
+$$\begin{array}{c | c | c}
+\text{Spieler 1 } \backslash \text{ Spieler 2} &  C & D \\
+\hline
+C &  (3,3) & (0,5) \\
+\hline 
+D &  (5,0) & (1,1) \\
+\end{array}$$
+Der totale Gewinn ist also maximal, wenn die beiden Spieler kooperieren. Der Einzelgewinn eines Spielers ist hingegen grösser für einen Spieler, der den andern betrügt, während der andere kooperiert. Wir definieren die beiden Zufallsvariablen:
+$$X = \left\{ \begin{array}{l l}
+1 & \mbox{ falls Spieler 1 kooperiert}\\
+0 & \mbox{ falls Spieler 1 betrügt}\\
+\end{array}\right. \quad \mbox{ und } \quad 
+Y = \left\{ \begin{array}{l l}
+1 & \mbox{ falls Spieler 2 kooperiert}\\
+0 & \mbox{ falls Spieler 2 betrügt}\\
+\end{array}\right.$$
+Es gibt also vier verschiedene mögliche Ereignisse für das Variablenpaar $(X,Y)$, nämlich $(1, 1)$, $(1, 0)$, $(0, 1)$ und $(0, 0)$, welche den folgenden Gewinnen entsprechen $(G_X,G_Y)$: $(R, R)$, $(S, T)$, $(T, S)$ und $(P, P)$.\\
+
+
+Wir betrachten 3 Strategien:
+\begin{enumerate}
+\item Strategie PROB: Der Spieler 1 kooperiert mit einer Wahrscheinlichkeit von $40\%$ und der Spieler 
+2 mit einer Wahrscheinlichkeit von $50\%$. 
+\item Strategie REAC: Der Spieler 1 kooperiert mit einer Wahrscheinlichkeit von 60$\%\,$ falls der
+Spieler 2 in der vorhergehenden Runde kooperiert hat und mit 35$\%,$ falls der Spieler 2 in der vorhergehenden Runde betrogen hat.
+Der Spieler zwei kooperiert mit einer Wahrscheinlichkeit von 50\%, unabhängig von der ausgeführten Aktion in der vorhergehenden Runde.
+\item Strategie ALTE: Der Spieler 1 kooperiert mit einer Wahrscheinlichkeit von $40\%,$ falls er in der
+vorhergehenden Runde kooperiert hat und mit $65\%,$ falls er in der vorhergehenden Runde betrogen hat. Der Spieler 2 kooperiert mit einer Wahrscheinlichkeit von 50\%, unabhängig von der ausgeführten Aktion in der vorhergehenden Runde.
+\end{enumerate}
+
+
+\subsection*{Fragen}
+
+\begin{enumerate}
+
+\item Beantworten Sie die folgenden Fragen zur Strategie PROB: 
+\begin{enumerate}
+\item Implementieren Sie die Strategie des Spielers 1. 
+\item Mit welcher relativen Häufigkeit ereignen sich die Ereignisse $(1, 1)$, $(0, 1)$, $(1, 0)$ und $(0, 0),$ 
+falls die Spieler 10 mal spielen?
+\item Welches ist der kumulierte durchschnittliche Gewinn der beiden Spieler? Welches ist der durchschnittliche
+Gewinn von jedem Spieler einzeln?
+\item Die gleichen Fragen, falls die Spieler 100'000 mal spielen. 
+\item Berechnen Sie die Wahrscheinlichkeit jedes Ereignisses und vergleichen Sie diese mit den erhaltenen
+relativen Häufigkeiten? Was können Sie daraus folgern?
+\item Berechnen Sie den Erwartungswert des kumulierten und des Einzelgewinns der beiden Spieler. Vergleichen Sie Ihre Resultate mit den erhaltenen empirischen Gewinnen.
+\item Benützen Sie Ihren Code um die Wahrscheinlichkeit zu bestimmen, mit welcher der Spieler 1 kooperieren sollte 
+um seinen Gewinn zu optimieren (wissend, dass die Strategie des zweiten Spielers die Gleiche bleibt). 
+\item Was lässt sich über den kumulierten Gewinn sagen, falls der Gewinn von Spieler 1 steigt?
+\end{enumerate}
+
+\item Beantworten Sie die Fragen zur Strategie REAC: 
+\begin{enumerate}
+\item Implementieren Sie die Strategie des Spielers 1. 
+\item Mit welcher relativen Häufigkeit werden die Ereignisse $(1, 1)$, $(0, 1)$, $(1, 0)$ und $(0, 0)$ realisiert, wenn die Spieler 10'000 spielen?
+\item Welches ist der kumulierte mittlere Gewinn der beiden Spieler? Welches ist der mittlere Gewinn jedes Spielers? 
+\item Wir definieren die Zufallsvariablen $X_t$ und $Y_t$ als Aktionen der Spieler 1 und 2 in Runde $t$. 
+Sind die Zufallsvariablen $X_t$ und $Y_t$ unabhängig? Was lässt sich von den Variablen $Y_t$ und $Y_{t-1}$
+sagen? Und von $X_t$ und $Y_t$? 
+\item Berechnen Sie die Wahrscheinlichkeit jedes Ereignisses und vergleichen Sie es mit den erhaltenen relativen Häufigkeiten. Was lässt sich daraus ableiten?
+\item Berechnen Sie den erwarteten kumulierten Gewinn und den Einzelgewinn der beiden Spieler. Vergleichen Sie Ihre Resultate mit den erhaltenen empirischen Resultaten.
+\item Testen Sie die optimale Strategie PROB gegen die Strategie REAC. Welche Strategie scheint effizienter?
+\item Optimieren Sie die Strategie REAC (gegenüber der Strategie PROB). 
+\end{enumerate}
+
+\item Beantworten Sie die folgenden Fragen zur Strategie ALTE.
+\begin{enumerate}
+\item Implementieren Sie die Strategie von Spieler 1. 
+\item Mit welcher relativen Häufigkeit treten die Ereignisse $(1, 1)$, $(0, 1)$, $(1, 0)$ und $(0, 0)$ ein, 
+wenn die Spieler 10'000 mal spielen?
+\item Was ist der kumulierte mittlere Gewinn der beiden Spieler? Was ist der durchschnittliche Gewinn jedes einzelnen Spielers?
+\item Kann diese Strategie mit einer Markov-Kette modelliert werden? Erklären Sie warum.
+\item Geben Sie die Übergangsmatrix an sowie den Vektor mit der Anfangsverteilung. 
+\item Besitzt diese Markov-Kette einen oder mehrere stationäre Zustände? Falls ja, welche(n)? Wie gross
+ist der mittlere Gewinn in diesem Fall?
+\item Konvergiert diese Markov-Kette gegen eine Grenzverteilung? Beantworten Sie diese
+Frage mithilfe der vorhergehenden Frage. 
+\item Stellen Sie eine Verbindung mit den empirisch gewonnenen Resultaten her. 
+\end{enumerate}
+
+\item Das schwache Gesetz der grossen Zahlen stellt eine Verbindung zwischen der relativen Häufigkeit und der Wahrscheinlichkeit eines Ereignisses her. Geben Sie den Inhalt dieses Gesetzes wieder und erklären Sie es mithilfe Ihrer Resultate.
+\item Definieren Sie Ihre eigene Strategie und begründen Sie diese. Welches ist Ihr mittlerer Gewinn.
+
+\end{enumerate}
+
+
+
+\end{document}
+
+

@@ -1,0 +1,527 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc} % encoding
+\usepackage{amsmath,amstext,amssymb,amsthm,array} % maths libraries
+\usepackage[francais, german]{babel} % language
+\usepackage{xifthen} %define new if 
+\usepackage[margin=2cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{automata}
+\setlength{\parindent}{0in}
+
+\begin{document}
+
+\hrule
+{\bfseries\large Projekt Wahrscheinlichkeit} \rule[-1.5ex]{0pt}{5ex}  \hfill {\bfseries\large Informatik}
+\hrule
+\vspace{5ex}
+
+\subsection*{Organisation} 
+
+In diesem Projekt werden verschiedene Konzepte, die Sie im Modul Wahrscheinlichkeit und Statistik gelernt haben, 
+angewendet. Ziel des Projekts ist es das intuitive Verständnis dieser Konzepte zu verbessern und an einer
+Anwendung der Wahrscheinlichkeitsrechnung zu arbeiten.\\
+
+Der Code wird in Java implementiert, ausgehend von Code, der zur Verfügung gestellt wird. Die modifizierten Abschnitte des Codes müssen hervorgehoben und kommentiert werden. Der Bericht wird in LaTeX auf der Grundlage dieses Dokuments erstellt.\\
+
+Die Arbeit wird in elektronischer Form abgegeben. Sie besteht aus einem Bericht im pdf-Format und entsprechenden Java-Dateien. Die Arbeit kann teilweise während den Unterrichtslektionen in Zweiergruppen erfolgen. Der
+Abgabetermin ist der \textbf{25. Mai 2015}.\\
+
+Die 10 Punkte, welche maximal für das Projekt erzielt werden können, setzen sich folgendermassen 
+zusammen:
+\begin{enumerate}
+\item[5P] Richtige Antworten zu den Fragen
+\item[3P] Qualität der Erklärungen
+\item[1P] Beherrschung der mathematischen Sprache
+\item[1P] Präsentation / Seitenlayout / Kommentare zum Code
+\end{enumerate} 
+
+Beachten Sie, dass es besonders wichtig ist, dass Sie Ihren Lösungsweg und Ihre Überlegungen erläutern. 
+Ihr Bericht muss für eine aussenstehende Person mit Grundkenntnissen in Wahrscheinlichkeitsrechnung verständlich sein.
+
+\subsection*{Erläuterung des Problems}
+
+Wir betrachten ein Spiel, an welchem zwei Spieler teilnehmen. Zwei Aktionen sind für beide Spieler möglich: sie können kooperieren (cooperate) (C) oder sie können betrügen (deceive) (D). Der Gewinn jedes Spielers hängt von der Aktion des andern Spielers ab, wie die Tabelle zeigt:
+$$\begin{array}{c | c | c}
+\text{Spieler 1 } \backslash \text{ Spieler 2} &  C & D \\
+\hline
+C &  (R,R) & (S,T) \\
+\hline
+D &  (T,S) & (P,P) \\
+\end{array}$$
+wobei R,S,T und P, die möglichen Gewinne des ersten bzw.\ des zweiten Spieler sind. Weiter gilt 
+$T > R > P > S$ und $2R > S+T$. Zum Beispiel:
+$$\begin{array}{c | c | c}
+\text{Spieler 1 } \backslash \text{ Spieler 2} &  C & D \\
+\hline
+C &  (3,3) & (0,5) \\
+\hline 
+D &  (5,0) & (1,1) \\
+\end{array}$$
+Der totale Gewinn ist also maximal, wenn die beiden Spieler kooperieren. Der Einzelgewinn eines Spielers ist hingegen grösser für einen Spieler, der den andern betrügt, während der andere kooperiert. Wir definieren die beiden Zufallsvariablen:
+$$X = \left\{ \begin{array}{l l}
+1 & \mbox{ falls Spieler 1 kooperiert}\\
+0 & \mbox{ falls Spieler 1 betrügt}\\
+\end{array}\right. \quad \mbox{ und } \quad 
+Y = \left\{ \begin{array}{l l}
+1 & \mbox{ falls Spieler 2 kooperiert}\\
+0 & \mbox{ falls Spieler 2 betrügt}\\
+\end{array}\right.$$
+Es gibt also vier verschiedene mögliche Ereignisse für das Variablenpaar $(X,Y)$, nämlich $(1, 1)$, $(1, 0)$, $(0, 1)$ und $(0, 0)$, welche den folgenden Gewinnen entsprechen $(G_X,G_Y)$: $(R, R)$, $(S, T)$, $(T, S)$ und $(P, P)$.\\
+
+
+Wir betrachten 3 Strategien:
+\begin{enumerate}
+\item Strategie PROB: Der Spieler 1 kooperiert mit einer Wahrscheinlichkeit von $40\%$ und der Spieler 
+2 mit einer Wahrscheinlichkeit von $50\%$. 
+\item Strategie REAC: Der Spieler 1 kooperiert mit einer Wahrscheinlichkeit von 60$\%\,$ falls der
+Spieler 2 in der vorhergehenden Runde kooperiert hat und mit 35$\%,$ falls der Spieler 2 in der vorhergehenden Runde betrogen hat.
+Der Spieler zwei kooperiert mit einer Wahrscheinlichkeit von 50\%, unabhängig von der ausgeführten Aktion in der vorhergehenden Runde.
+\item Strategie ALTE: Der Spieler 1 kooperiert mit einer Wahrscheinlichkeit von $40\%,$ falls er in der
+vorhergehenden Runde kooperiert hat und mit $65\%,$ falls er in der vorhergehenden Runde betrogen hat. Der Spieler 2 kooperiert mit einer Wahrscheinlichkeit von 50\%, unabhängig von der ausgeführten Aktion in der vorhergehenden Runde.
+\end{enumerate}
+
+
+\subsection*{Fragen}
+
+\begin{enumerate}
+
+\item Beantworten Sie die folgenden Fragen zur Strategie PROB: 
+\begin{enumerate}
+\item Implementieren Sie die Strategie des Spielers 1.\\
+\textbf{Antwort:} Siehe beigelegten Code.
+
+\item Mit welcher relativen Häufigkeit ereignen sich die Ereignisse $(1, 1)$, $(1, 0)$, $(0, 1)$ und $(0, 0)$, falls die Spieler 10 mal spielen?\\
+\begin{center}Erhaltene Resultate Java Programm:\end{center}
+\begin{verbatim}
+GAME INFORMATION:
+player 1 follows strategy 2
+player 2 follows strategy 1
+game will be played over 10 rounds
+
+GAME STATISTICS:
+(1, 1):       4 time(s) -  40.0%
+(1, 0):       2 time(s) -  20.0%
+(0, 1):       0 time(s) -   0.0%
+(0, 0):       4 time(s) -  40.0%
+total:       10 time(s)
+\end{verbatim}
+\textbf{Antwort:} Die relativen Häufigkeiten für eine zufällig ausgewählte Durchführung sind $0.40$, $0.20$, $0.00$ und $0.40$.
+\newpage
+
+\item Welches ist der kumulierte durchschnittliche Gewinn der beiden Spieler?
+Welches ist der durchschnittliche Gewinn von jedem Spieler einzeln?\\
+\begin{center}Erhaltene Resultate Java Programm:\end{center}
+\begin{verbatim}
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1:      16.00 |        1.60
+player 2:      26.00 |        2.60
+total:         42.00 |        4.20
+\end{verbatim}
+\textbf{Antwort:} Der Spieler 1 gewinnt in einer zufällig ausgewählten Durchführung durchschnittlich $1.60$, der Spieler 2 $2.60$.
+Zusammen gewinnen sie also durchschnittlich $4.20$.
+
+\item Die gleichen Fragen, falls die Spieler 100'000 mal spielen.\\
+\begin{center}Erhaltene Resultate Java Programm:\end{center}
+\begin{verbatim}
+GAME INFORMATION:
+player 1 follows strategy 2
+player 2 follows strategy 1
+game will be played over 100,000 rounds
+
+GAME STATISTICS:
+(1, 1):  19,676 time(s) -  19.7%
+(1, 0):  20,238 time(s) -  20.2%
+(0, 1):  29,837 time(s) -  29.8%
+(0, 0):  30,249 time(s) -  30.2%
+total:  100,000 time(s)
+
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1: 238,462.00 |        2.38
+player 2: 190,467.00 |        1.90
+total:    428,929.00 |        4.29
+\end{verbatim}
+\textbf{Antwort:} Die relativen Häufigkeiten für eine zufällig ausgewählte Durchführung sind $0.197$, $0.202$, $0.298$ und $0.302$.
+Der Spieler 1 gewinnt in derselben Durchführung durchschnittlich $2.38$, der Spieler 2 $1.90$.
+Zusammen gewinnen sie also durchschnittlich $4.29$.
+\newpage
+
+\item Berechnen Sie die Wahrscheinlichkeit jedes Ereignisses und vergleichen Sie diese mit den erhaltenen relativen Häufigkeiten?
+Was können Sie daraus folgern?\\
+$$P(X = 1, Y = 1) = P(X = 1) P(Y = 1) = 0.4 \cdot 0.5 = 0.2$$
+$$P(X = 1, Y = 0) = P(X = 1) P(Y = 0) = 0.4 \cdot 0.5 = 0.2$$
+$$P(X = 0, Y = 1) = P(X = 0) P(Y = 1) = 0.6 \cdot 0.5 = 0.3$$
+$$P(X = 0, Y = 0) = P(X = 0) P(Y = 0) = 0.6 \cdot 0.5 = 0.3$$
+
+\textbf{Antwort:} Bei der Durchführung mit $10$ Runden liegen die relativen Häufigkeiten teilweise ziemlich neben den errechneten Wahrscheinlichkeiten,
+bei der Durchführung mit $100'000$ Runden sind die relativen Häufigkeiten schon viel näher an den Wahrscheinlichkeiten.\\
+Die relativen Häufigkeiten nähern sich den errechneten Wahrscheinlichkeiten bei häufiger Durchführung immer näher an.
+
+\item Berechnen Sie den Erwartungswert des kumulierten und des Einzelgewinns der beiden Spieler.
+Vergleichen Sie Ihre Resultate mit den erhaltenen empirischen Gewinnen.
+$$E(G_{Spieler 1}) = \sum_{i} p_i g_i = 0.2 \cdot 3 + 0.2 \cdot 0 + 0.3 \cdot 5 + 0.3 \cdot 1 = 2.4$$
+$$E(G_{Spieler 2}) = \sum_{i} p_i g_i = 0.2 \cdot 3 + 0.2 \cdot 5 + 0.3 \cdot 0 + 0.3 \cdot 1 = 1.9$$
+\textbf{Antwort:} Wie schon bei den relativen Häufigkeiten und den Wahrscheinlichkeiten nähern sich auch die empirischen Gewinnen den Erwartungswerten mit häufiger Durchführung immer näher an.
+
+\item Benützen Sie Ihren Code um die Wahrscheinlichkeit zu bestimmen, mit welcher der Spieler 1 kooperieren sollte um seinen Gewinn zu optimieren (wissend, dass die Strategie des zweiten Spielers die Gleiche bleibt).
+\begin{center}Erhaltene Resultate Java Programm:\end{center}
+\begin{verbatim}
+GAME INFORMATION:
+player 1 follows strategy 8
+player 2 follows strategy 1
+game will be played over 100,000 rounds
+
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1: 299,152.00 |        2.99
+player 2:  50,212.00 |        0.50
+total:    349,364.00 |        3.49
+\end{verbatim}
+\textbf{Antwort:} Wenn Spieler 1 nie kooperiert und der Spieler 2 weiterhin mit gleicher Wahrscheinlichkeit kooperiert oder nicht,
+also nicht auf den Strategiewechsel reagiert, wird der Gewinn für Spieler 1 optimiert.\\
+Der Spieler 1 gewinnt dann im Durchschnitt $0.5 \cdot 5 + 0.5 \cdot 1 = 3$ und der Spieler 2 nur $0.5 \cdot 1 + 0.5 \cdot 0 = 0.5$.\\
+Im günstigsten Fall gewinnt der Spieler 1 $5$ und im schlechtesten Fall immer noch $3$, dieses Resultat liegt immer noch $0.75$ über dem durchschnittlichen Gewinn der Zufallsstrategie (RAND) $0.25 \cdot 0 + 0.25 \cdot 1 + 0.25 \cdot 3 + 0.25 \cdot 5 = 2.25$.
+\newpage
+
+\item Was lässt sich über den kumulierten Gewinn sagen, falls der Gewinn von Spieler 1 steigt?\\
+\textbf{Antwort:} Der kumulierte Gewinn der beiden Spieler sinkt, wenn der Gewinn des einen Spielers steigt.
+Durch das Betrügen des einen Spielers bricht der Gewinn des anderen ein.\\
+Wenn beide Spieler kooperieren gewinnen beide $3$. Wenn der Spieler 1 aber betrügt, gewinnt er $5$, der Spieler 2 gewinnt $0$, also nichts mehr.
+Der Spieler 1 gewinnt $5 - 3 = 2$ dazu, der Spieler 2 verliert aber $3 - 0 = 3$.\\
+$3 > 2 \Rightarrow$ der Verlust überwiegt den Gewinn, daher sinkt der kumulierte Gewinn.
+\end{enumerate}
+
+\item Beantworten Sie die Fragen zur Strategie REAC: 
+\begin{enumerate}
+\item Implementieren Sie die Strategie des Spielers 1.\\
+\textbf{Antwort:} Siehe beigelegten Code.
+
+\item Mit welcher relativen Häufigkeit werden die Ereignisse $(1, 1)$, $(1, 0)$, $(0, 1)$ und $(0, 0)$ realisiert, wenn die Spieler 10'000 spielen?\\
+\begin{center}Erhaltene Resultate Java Programm:\end{center}
+\begin{verbatim}
+GAME INFORMATION:
+player 1 follows strategy 4
+player 2 follows strategy 1
+game will be played over 10,000 rounds
+
+GAME STATISTICS:
+(1, 1):   2,312 time(s) -  23.1%
+(1, 0):   2,411 time(s) -  24.1%
+(0, 1):   2,668 time(s) -  26.7%
+(0, 0):   2,609 time(s) -  26.1%
+total:   10,000 time(s)
+\end{verbatim}
+\textbf{Antwort:} Die relativen Häufigkeiten für 10'000 Durchführung sind $0.231$, $0.241$, $0.267$ und $0.261$.
+
+\item Welches ist der kumulierte mittlere Gewinn der beiden Spieler?
+Welches ist der mittlere Gewinn jedes Spielers?
+\begin{center}Erhaltene Resultate Java Programm:\end{center}
+\begin{verbatim}
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1:  22,885.00 |        2.29
+player 2:  21,600.00 |        2.16
+total:     44,485.00 |        4.45
+\end{verbatim}
+\textbf{Antwort:} Der Spieler 1 gewinnt in einer zufällig ausgewählten Durchführung durchschnittlich $2.29$, der Spieler 2 $2.16$.
+Zusammen gewinnen sie also durchschnittlich $4.45$.
+\newpage
+
+\item Wir definieren die Zufallsvariablen $X_t$ und $Y_t$ als Aktionen der Spieler 1 und 2 in Runde $t$.
+Sind die Zufallsvariablen $X_t$ und $Y_t$ unabhängig? Was lässt sich von den Variablen $Y_t$ und $Y_{t-1}$ sagen?
+Und von $X_t$ und $Y_{t-1}$?\\
+\textbf{Antwort:} Die Zufallsvariablen $X_t$ und $Y_t$ sind unabhängig, der Spieler 1 kann seinen Zug $X_t$ gar nicht vom Zug des Spielers 2 $Y_t$ abhängig machen, da er ihn (noch) nicht kennt.\\
+Die Zufallsvariablen $Y_t$ und $Y_{t-1}$ sind ebenfalls unabhängig, da die Strategie des Spielers 2 zufällig ist.\\
+Die Zufallsvariablen $X_t$ und $Y_{t-1}$ hingegen sind abhängig, da der Spieler 1 seinen Zug $X_t$ abhängig vom letzten Zug des Spielers 2 $Y_{t-1}$ entscheidet.
+
+\item Berechnen Sie die Wahrscheinlichkeit jedes Ereignisses und vergleichen Sie es mit den erhaltenen relativen Häufigkeiten.
+Was lässt sich daraus ableiten?
+\begin{center}Allgemein:\end{center}
+$$P(X_t = x, Y_t = y) = \sum_{k} P(X_t = x, Y_t = y | Y_{t-1} = k)$$
+$$P(X_t = x, Y_t = y | Y_{t-1} = z) = P(Y_{t-1} = z) P(X_t = x \cap Y_t = y \cap Y_{t-1} = z)$$
+\begin{center}Vereinfacht:\end{center}
+$$P(X = x, Y = y) = \sum_{z} P(Z = z) P(X = x | Z = z) P(Y = y)$$
+$$P(X = 1, Y = 1) = 0.5 \cdot 0.6 \cdot 0.5 + 0.5 \cdot 0.35 \cdot 0.5 = \frac{19}{80} \approx 0.238$$
+$$P(X = 1, Y = 0) = 0.5 \cdot 0.6 \cdot 0.5 + 0.5 \cdot 0.35 \cdot 0.5 = \frac{19}{80} \approx 0.238$$
+$$P(X = 0, Y = 1) = 0.5 \cdot 0.4 \cdot 0.5 + 0.5 \cdot 0.65 \cdot 0.5 = \frac{21}{80} \approx 0.263$$
+$$P(X = 0, Y = 0) = 0.5 \cdot 0.4 \cdot 0.5 + 0.5 \cdot 0.65 \cdot 0.5 = \frac{21}{80} \approx 0.263$$
+\textbf{Antwort:} Wie schon bei der Strategie PROB ist es auch hier so, dass sich die relativen Wahrscheinlichkeiten bei einer höheren Anzahl Durchführungen den errechneten Wahrscheinlichkeiten annähern.\\
+Auch gilt, wie bereits bei der Strategie PROB, $$P(X = x, Y = 1) = P(X = x, Y = 0) = P(X = x),$$ da die Strategie des Spielers 2 zufällig ist.
+
+\item Berechnen Sie den erwarteten kumulierten Gewinn und den Einzelgewinn der beiden Spieler.
+Vergleichen Sie Ihre Resultate mit den erhaltenen empirischen Resultaten.
+$$E_{Spieler 1}(G) = \sum_{i} p_i g_i = \frac{19}{80} \cdot 3 + \frac{19}{80} \cdot 0 + \frac{21}{80} \cdot 5 + \frac{21}{80} \cdot 1 = \frac{183}{80} \approx 2.29$$
+$$E_{Spieler 2}(G) = \sum_{i} p_i g_i = \frac{19}{80} \cdot 3 + \frac{19}{80} \cdot 5 + \frac{21}{80} \cdot 0 + \frac{21}{80} \cdot 1 = \frac{173}{80} \approx 2.16$$
+\textbf{Antwort:} Auch in diesem Beispiel liegen dank der hohen Anzahl an Durchläufen die empirisch erhaltenen Resultate sehr nah an den errechneten Erwartungswerten.
+Nach dem Runden auf zwei Nachkommastellen wie bei Preisen in CHF übrig ist keine Abweichung mehr feststellbar.
+\newpage
+
+\item Testen Sie die optimale Strategie PROB gegen die Strategie REAC. Welche Strategie scheint effizienter?
+\begin{center}Erhaltene Resultate Java Programm:\end{center}
+\begin{verbatim}
+GAME INFORMATION:
+player 1 follows strategy 4
+player 2 follows strategy 8
+game will be played over 100,000 rounds
+
+GAME STATISTICS:
+(1, 1):       0 time(s) -   0.0%
+(1, 0):  35,095 time(s) -  35.2%
+(0, 1):       0 time(s) -   0.0%
+(0, 0):  64,905 time(s) -  64.8%
+total:  100,000 time(s)
+
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1:  64,905.00 |        0.65
+player 2: 240,380.00 |        2.41
+total:    305,285.00 |        3.06
+\end{verbatim}
+\textbf{Antwort:} Die optimierte Strategie PROB lief darauf hinaus, immer zu betrügen. Der Spieler 1 kann aber unmöglich gegen den Spieler 2 gewinnen, wenn dieser immer betrügt.\\
+Das bestmögliche Resultat, welches Spieler 1 in diesem Fall noch erreichen könnte, wäre ebenfalls immer zu betrügen und so den Gewinn von Spieler 2 zu minimieren.
+In diesem Extremfall würden beide nur noch $1$ gewinnen.\\
+Allerdings kann dieser Extremfall nicht als Massstab genommen werden, um die Effizienz der zwei Strategien zu beurteilen.
+Leider ist es so, dass die Strategie REAC keine Chance gegen die Strategie PROB mit einer Wahrscheinlichkeit zu kooperieren $p < 0.5$ hat.
+Nur Wenn die Wahrscheinlichkeit $p$ grösser als $0.5$ ist, hat die Strategie REAC eine realistische Chance zu gewinnen.\\
+Dies liegt daran, dass die Strategie REAC davon ausgeht, dass der andere Spieler eine nicht-zufällige Strategie verfolgt.
+Doch die Strategie PROB ist genau dass: zufällig.\\
+Die Strategie PROB ist von daher effizienter, als dass sie nicht von unüberprüfbaren Annahmen ausgeht.
+\newpage
+
+\item Optimieren Sie die Strategie REAC (gegenüber der optimierten Strategie PROB).\\
+\textbf{Antwort:} Wie im vorherigen Abschnitt bereits erwähnt, wäre die einzige Optimierungsmöglichkeit, ebenfalls nur noch zu betrügen.
+Dies ist nicht wirklich eine Optimierung, da der Gewinn auf den tiefen Wert von $1$ pro Runde limitiert wird.
+So wird der kumulierte Gewinn auf $2$, den tiefst möglichen Wert, gesenkt.\\
+Daher folgt unsere Optimierung einem immerhin leicht optimistischeren Ansatz:
+Der erste Zug ist wie immer zufällig ($0.5$ zu kooperieren und $0.5$ zu betrügen), für die nächsten Züge wird die Wahrscheinlichkeit zu kooperien,
+falls man in der letzten Runde betrogen wurde ($p_{CD}$) auf $0$ gesenkt. $\rightarrow$ Siehe beigelegten Code.\\
+Solange man also betrogen wird, betrügt man auch, aber wenn der Gegenspieler kooperiert, gibt es die Möglichkeit selber auch zu kooperieren.
+\begin{verbatim}
+GAME INFORMATION:
+player 1 follows strategy 9
+player 2 follows strategy 8
+game will be played over 10,000 rounds
+
+GAME STATISTICS:
+(1, 1):       0 time(s) -   0.0%
+(1, 0):       1 time(s) -   0.0%
+(0, 1):       0 time(s) -   0.0%
+(0, 0):   9,999 time(s) - 100.0%
+total:   10,000 time(s)
+
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1:   9,999.00 |        1.00
+player 2:  10,004.00 |        1.00
+total:     20,003.00 |        2.00
+\end{verbatim}
+\end{enumerate}
+\newpage
+\item Beantworten Sie die folgenden Fragen zur Strategie ALTE.
+\begin{enumerate}
+\item Implementieren Sie die Strategie von Spieler 1.\\
+\textbf{Antwort:} Siehe beigelegten Code.
+
+\item Mit welcher relativen Häufigkeit treten die Ereignisse $(1, 1)$, $(1, 0)$, $(0, 1)$ und $(0, 0)$ ein, wenn die Spieler 10'000 mal spielen?\\
+\begin{center}Erhaltene Resultate Java Programm:\end{center}
+\begin{verbatim}
+GAME INFORMATION:
+player 1 follows strategy 3
+player 2 follows strategy 1
+game will be played over 10,000 rounds
+
+GAME STATISTICS:
+(1, 1):   2,570 time(s) -  25.7%
+(1, 0):   2,591 time(s) -  25.9%
+(0, 1):   2,448 time(s) -  24.5%
+(0, 0):   2,391 time(s) -  23.9%
+total:   10,000 time(s)
+\end{verbatim}
+\textbf{Antwort:} Die relativen Häufigkeiten für 10'000 Durchführung sind $0.257$, $0.259$, $0.245$ und $0.239$.
+
+\item Was ist der kumulierte mittlere Gewinn der beiden Spieler?
+Was ist der durchschnittliche Gewinn jedes einzelnen Spielers?
+\begin{center}Erhaltenes Resultat Java Programm:\end{center}
+\begin{verbatim}
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1:  22,341.00 |        2.23
+player 2:  23,056.00 |        2.31
+total:     45,397.00 |        4.54
+\end{verbatim}
+\textbf{Antwort:} Der Spieler 1 gewinnt bei 10'000 Durchführungen durchschnittlich $2.23$, der Spieler 2 $2.31$.
+Zusammen gewinnen sie also durchschnittlich $4.54$.
+
+\item Kann diese Strategie mit einer Markov-Kette modelliert werden? Erklären Sie warum.\\
+\textbf{Antwort:} Ja, da wir aus der Aufgabenstellung die möglichen Zustände $X=0$ (betrügen) und $X=1$ (kooperieren) sowie die Wahrscheinlichkeiten der Übergänge kennen.
+\begin{center}
+\begin{tikzpicture}[->,auto,semithick,node distance=3cm]
+\tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
+\node[state] (1)            {$1$};
+\node[state] (0)[left of=1] {$0$};
+\path
+(0) edge[loop left]  node{$0.35$} (0)
+    edge[bend left]  node{$0.65$} (1)
+(1) edge[bend left]  node{$0.6$}  (0)
+    edge[loop right] node{$0.4$}  (1);
+\end{tikzpicture}
+\end{center}
+
+\item Geben Sie die Übergangsmatrix an sowie den Vektor mit der Anfangsverteilung.
+\begin{center}
+$$P = \begin{pmatrix}
+ 0.35 & 0.65\\
+ 0.6  & 0.4\\
+\end{pmatrix},
+\vec x_0 = \begin{pmatrix}
+ 0.5 & 0.5
+\end{pmatrix}$$
+\end{center}
+\newpage
+
+\item Besitzt diese Markov-Kette einen oder mehrere stationäre Zustände?
+Falls ja, welche(n)?
+Wie gross ist der mittlere Gewinn in diesem Fall?\\
+\textbf{Antwort:} Ein Zustand $\vec x_x$ heisst stationär, falls:\\
+$$\vec x_s =\vec x_s P$$
+
+Wir setzen ein und vereinfachen:
+$$\begin{pmatrix}
+ x & y
+\end{pmatrix} = \begin{pmatrix}
+ x & y
+\end{pmatrix} \begin{pmatrix}
+ 0.35 & 0.65\\
+ 0.6  & 0.4
+\end{pmatrix}$$
+$$\Leftrightarrow \begin{pmatrix}
+ x & y
+\end{pmatrix} = \begin{pmatrix}
+ 0.35x + 0.6y & 0.65x + 0.4y
+\end{pmatrix}$$
+
+Wir erhalten folgendes Gleichungssystem und lösen es auf:
+$$\begin{vmatrix}
+ x = 0.35x + 0.6y\\
+ y = 0.65x + 0.4y\\
+ x + y = 1
+\end{vmatrix}$$
+$$\Leftrightarrow \begin{vmatrix}
+ x = 0.48\\
+ y = 0.52
+\end{vmatrix}$$
+
+Wir schreiben als Zeilenvektor:
+$$\vec x_s = \begin{pmatrix}
+ 0.48 & 0.52
+\end{pmatrix}$$
+
+Es gibt genau einen stationären Vektor $\vec x_s = \begin{pmatrix} 0.48 & 0.52 \end{pmatrix}$.
+
+\item Konvergiert diese Markov-Kette gegen eine Grenzverteilung? Beantworten Sie diese Frage mithilfe der vorhergehenden Frage.\\
+\textbf{Antwort:} Eine Matrix $P_s$ stellt eine Grenzverteilung dar, falls:
+$$\lim_{n \to \infty} P^n = \begin{pmatrix}
+ \vec x_s\\
+ \vec x_s
+\end{pmatrix} = P_s$$
+
+Da wir den stationären Vektor $\vec x_s$ bereits aus der vorherigen Aufgabe kennen, können wir einsetzen:
+$$P_s = \begin{pmatrix}
+ \vec x_s\\
+ \vec x_s
+\end{pmatrix} = \begin{pmatrix}
+ 0.48 & 0.52\\
+ 0.48 & 0.52
+\end{pmatrix}$$
+
+Ja, da die Übergangsmatrix den stationären Vektor $\vec x_s = \begin{pmatrix} 0.48 & 0.52 \end{pmatrix}$ besitzt, konvergiert sie gegen die Grenzverteilung $P_s = \begin{pmatrix}
+ \vec x_s\\
+ \vec x_s
+\end{pmatrix} = \begin{pmatrix}
+ 0.48 & 0.52\\
+ 0.48 & 0.52
+\end{pmatrix}$.
+
+\item Stellen Sie eine Verbindung mit den empirisch gewonnenen Resultaten her.\\
+\textbf{Antwort:} Wie wir aus einer vorherigen Aufgabe wissen, sind die relativen Häufigkeiten für 10'000 Durchführung $P(1, 1) = 0.257$, $P(1, 0) = 0.259$, $P(0, 1) = 0.245$ und $P(0, 0) = 0.239$.\\
+Summiert ergibt dies die empirischen Resultate:
+$$P(X = 0) = P(0, 1) + P(0, 0) = 0.245 + 0.239 = 0.484 \approx 0.48$$
+und
+$$P(X = 1) = P(1, 1) + P(1, 0) = 0.257 + 0.259 = 0.516 \approx 0.52.$$
+Diese Wahrscheinlichkeiten zu kooperieren bzw. zu betrügen stimmen genau mit den Werten des stationären Vektors und der Grenzverteilungsmatrix überein.
+\end{enumerate}
+\newpage
+
+\item Das schwache Gesetz der grossen Zahlen stellt eine Verbindung zwischen der relativen Häufigkeit und der Wahrscheinlichkeit eines Ereignisses her.
+Geben Sie den Inhalt dieses Gesetzes wieder und erklären Sie es mithilfe Ihrer Resultate.\\
+\textbf{Antwort:} Das schwache Gesetz der grossen Zahlen lautet wie folgt:
+$$\lim_{n\rightarrow\infty}\operatorname{P}\left(\left|\overline{X}_n\right|>\varepsilon\right)=0$$
+für alle positiven Zahlen $\varepsilon$, wobei
+$$\overline{X}_n=\tfrac1n \textstyle\sum\limits_{i=1}^{n}(X_i-E ({X}_i)).$$
+Das heisst, dass für jedes noch so kleine $\varepsilon > 0$ die Wahrscheinlichkeit, dass die relative Häufigkeit des Ereignisses nicht im Intervall $(x - \varepsilon, x + \varepsilon)$ liegt, gegen null konvergiert, wenn die Anzahl der Versuche ins unendliche steigt.\\
+Einfacher ausgedrückt besagt es, dass die relative Häufigkeit jedes Ereignisses eines Zufallsexperiments sich der Wahrscheinlichkeit dieses Ereignisses annähert, wenn das Experiment immer wieder durchgeführt wird.\\
+Dies konnten wir beobachten, da die relative Häufigkeit bei einer höheren Anzahl Durchführungen (z.B. $n=10'000$ oder $n=100'000$) näher an der errechneten Wahrscheinlichkeit lag, als mit einer tieferen Anzahl Durchführungen (z.B. $n=10$).\\
+\\
+Als Beispiel wollen wir nochmals die Resultate der Aufgabe 1 zusammenfassen:\\
+\begin{center}
+\begin{tabular}{c|c c c c}
+ Wahrscheinlichkeit & relative Häufigkeit & relative Häufigkeit & relative Häufigkeit\\
+    (errechnet)     &       ($n=10$)      &    ($n=100'000$)    &   ($n=2'000'000$)  \\
+       $0.2$        &       $0.400$       &       $0.197$       &       $0.200$      \\
+       $0.2$        &       $0.200$       &       $0.202$       &       $0.200$      \\
+       $0.3$        &       $0.000$       &       $0.298$       &       $0.300$      \\
+       $0.3$        &       $0.400$       &       $0.302$       &       $0.300$
+\end{tabular}
+\end{center}
+Wie eindeutig zu sehen ist, nähern sich die eingetretenen relativen Häufigkeiten mit höherer Anzahl Durchführungen $n$ der erreichneten Wahrscheinlichkeit an.\\
+Beim Experiment mit $n=10$ Runden liegen die relativen Häufigkeiten noch um $\pm 0.3$ neben den errechneten Wahrscheinlichkeiten.\\
+Beim Experiment mit $n=100'000$ Runden liegen die sie nur noch um $\pm 0.02$ daneben.\\
+Und bei der Durchführung von $n=2'000'000$ Runden sind die Abweichungen $\left|\varepsilon\right|<10^{-3}$ und können nicht mehr ermittelt werden.
+\newpage
+
+\item Definieren Sie Ihre eigene Strategie und begründen Sie diese.
+Welches ist Ihr mittlerer Gewinn?
+\begin{center}Erhaltenes Resultat Java Programm:\end{center}
+\begin{verbatim}
+GAME INFORMATION:
+player 1 follows strategy 6
+player 2 follows strategy 1
+game will be played over 100,000 rounds
+
+GAME STATISTICS:
+(1, 1):  11,169 time(s) -  11.2%
+(1, 0):  11,140 time(s) -  11.1%
+(0, 1):  38,926 time(s) -  38.9%
+(0, 0):  38,765 time(s) -  38.8%
+total:  100,000 time(s)
+
+PLAYER STATISTICS:
+          total gain | middle gain
+player 1: 266,902.00 |        2.67
+player 2: 127,972.00 |        1.28
+total:    394,874.00 |        3.95
+\end{verbatim}
+\textbf{Antwort:} Unsere eigene Strategie analysiert die letzten $7$ Runden.\\
+Wenn der Spieler in mehr als der Hälfte der Runden (genau: $>53\%$ der Runden) mehr als der Gegner gewonnen hat (genau: $>53\%$ des kumulierten Gewinns),
+kooperiert der Spieler mit einer sehr hohen Wahrscheinlichkeit (genau: $93\%$).\\
+Wenn dies nicht zutrifft nur mit einer sehr tiefen Wahrscheinlichkeit (genau: $3\%$).\\
+Die Strategie ist zuverlässiger, da sie nicht nur eine Runde sondern bis zu sieben Runden zurückblickt.\\
+Ausserdem versucht die Strategie dadurch, dass sie unter bestimmten Bedingungen nicht immer dasselbe macht - es also eine kleine Wahrscheinlichkeit (genau: $7\%$ bzw. $3\%$) gibt,
+einen nicht naheliegenden Zug zu machen - eine verfahrende Spielsituation (beispielsweise dass sich beide Spieler nur noch betrügen) aufzulösen und so einen höheren Gewinn zu erlauben.\\
+Ein Spieler, der unsere eigene Strategie spielt, gewinnt im Durchschnitt folgende Beträge:
+\begin{center}
+\begin{tabular}{c c c c}
+ Strategie Spieler 2 & Gewinn Spieler 1 & Gewinn Spieler 2 & Gewinner \\
+        50/50        &      $2.67$      &      $1.28$      & Spieler 1\\
+        PROB         &      $2.39$      &      $1.16$      & Spieler 1\\
+        REAC         &      $2.34$      &      $1.11$      & Spieler 1\\
+        ALTE         &      $2.75$      &      $1.30$      & Spieler 1\\
+   PROB (optimiert)  &      $0.97$      &      $1.12$      & Spieler 2\\
+   REAC (optimiert)  &      $1.04$      &      $1.10$      & Spieler 2
+\end{tabular}
+\end{center}
+Wie zu sehen ist, gewinnt ein Spieler mit unserer Strategie gegen alle anderen vorgegebenen Strategien.
+Gegen die beiden "optimierten" (betrügenden) Strategien kann man gar nicht gewinnen, allerdings ist dort der Verlust im Vergleich zu Spieler 2 minimiert.
+\end{enumerate}
+\end{document}
