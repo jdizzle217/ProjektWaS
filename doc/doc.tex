@@ -178,10 +178,10 @@ player 1: 299,152.00 |        2.99
 player 2:  50,212.00 |        0.50
 total:    349,364.00 |        3.49
 \end{verbatim}
-\textbf{Antwort:} Wenn Spieler 1 nie kooperiert und der Spieler 2 weiterhin mit gleicher Wahrscheinlichkeit kooperiert oder nicht,
+\textbf{Antwort:} Wenn Spieler 1 nie kooperiert ($p=0$) und der Spieler 2 weiterhin mit gleicher Wahrscheinlichkeit kooperiert oder nicht,
 also nicht auf den Strategiewechsel reagiert, wird der Gewinn für Spieler 1 optimiert.\\
 Der Spieler 1 gewinnt dann im Durchschnitt $0.5 \cdot 5 + 0.5 \cdot 1 = 3$ und der Spieler 2 nur $0.5 \cdot 1 + 0.5 \cdot 0 = 0.5$.\\
-Im günstigsten Fall gewinnt der Spieler 1 $5$ und im schlechtesten Fall immer noch $3$, dieses Resultat liegt immer noch $0.75$ über dem durchschnittlichen Gewinn der Zufallsstrategie (RAND) $0.25 \cdot 0 + 0.25 \cdot 1 + 0.25 \cdot 3 + 0.25 \cdot 5 = 2.25$.
+Der Spieler 1 gewinnt zwar durchschnittlich nur noch $3$, dieses Resultat liegt immer noch $0.75$ über dem durchschnittlichen Gewinn der Zufallsstrategie (RAND) $0.25 \cdot 0 + 0.25 \cdot 1 + 0.25 \cdot 3 + 0.25 \cdot 5 = 2.25$.
 \newpage
 
 \item Was lässt sich über den kumulierten Gewinn sagen, falls der Gewinn von Spieler 1 steigt?\\
@@ -224,7 +224,7 @@ player 1:  22,885.00 |        2.29
 player 2:  21,600.00 |        2.16
 total:     44,485.00 |        4.45
 \end{verbatim}
-\textbf{Antwort:} Der Spieler 1 gewinnt in einer zufällig ausgewählten Durchführung durchschnittlich $2.29$, der Spieler 2 $2.16$.
+\textbf{Antwort:} Der Spieler 1 gewinnt durchschnittlich $2.29$, der Spieler 2 $2.16$.
 Zusammen gewinnen sie also durchschnittlich $4.45$.
 \newpage
 
@@ -233,7 +233,7 @@ Sind die Zufallsvariablen $X_t$ und $Y_t$ unabhängig? Was lässt sich von den V
 Und von $X_t$ und $Y_{t-1}$?\\
 \textbf{Antwort:} Die Zufallsvariablen $X_t$ und $Y_t$ sind unabhängig, der Spieler 1 kann seinen Zug $X_t$ gar nicht vom Zug des Spielers 2 $Y_t$ abhängig machen, da er ihn (noch) nicht kennt.\\
 Die Zufallsvariablen $Y_t$ und $Y_{t-1}$ sind ebenfalls unabhängig, da die Strategie des Spielers 2 zufällig ist.\\
-Die Zufallsvariablen $X_t$ und $Y_{t-1}$ hingegen sind abhängig, da der Spieler 1 seinen Zug $X_t$ abhängig vom letzten Zug des Spielers 2 $Y_{t-1}$ entscheidet.
+Die Zufallsvariablen $X_t$ und $Y_{t-1}$ hingegen sind abhängig, da der Spieler 1 seinen Zug $X_t$ abhängig vom letzten Zug des Spielers 2 $Y_{t-1}$ macht.
 
 \item Berechnen Sie die Wahrscheinlichkeit jedes Ereignisses und vergleichen Sie es mit den erhaltenen relativen Häufigkeiten.
 Was lässt sich daraus ableiten?
@@ -247,14 +247,14 @@ $$P(X = 1, Y = 0) = 0.5 \cdot 0.6 \cdot 0.5 + 0.5 \cdot 0.35 \cdot 0.5 = \frac{1
 $$P(X = 0, Y = 1) = 0.5 \cdot 0.4 \cdot 0.5 + 0.5 \cdot 0.65 \cdot 0.5 = \frac{21}{80} \approx 0.263$$
 $$P(X = 0, Y = 0) = 0.5 \cdot 0.4 \cdot 0.5 + 0.5 \cdot 0.65 \cdot 0.5 = \frac{21}{80} \approx 0.263$$
 \textbf{Antwort:} Wie schon bei der Strategie PROB ist es auch hier so, dass sich die relativen Wahrscheinlichkeiten bei einer höheren Anzahl Durchführungen den errechneten Wahrscheinlichkeiten annähern.\\
-Auch gilt, wie bereits bei der Strategie PROB, $$P(X = x, Y = 1) = P(X = x, Y = 0) = P(X = x),$$ da die Strategie des Spielers 2 zufällig ist.
+Auch gilt, wie bereits bei der Strategie PROB, $$P(X = x|Y = 1) = P(X = x|Y = 0) = P(X = x),$$ da die Strategie des Spielers 2 zufällig ist.
 
 \item Berechnen Sie den erwarteten kumulierten Gewinn und den Einzelgewinn der beiden Spieler.
 Vergleichen Sie Ihre Resultate mit den erhaltenen empirischen Resultaten.
-$$E_{Spieler 1}(G) = \sum_{i} p_i g_i = \frac{19}{80} \cdot 3 + \frac{19}{80} \cdot 0 + \frac{21}{80} \cdot 5 + \frac{21}{80} \cdot 1 = \frac{183}{80} \approx 2.29$$
-$$E_{Spieler 2}(G) = \sum_{i} p_i g_i = \frac{19}{80} \cdot 3 + \frac{19}{80} \cdot 5 + \frac{21}{80} \cdot 0 + \frac{21}{80} \cdot 1 = \frac{173}{80} \approx 2.16$$
+$$E_{\text{Spieler 1}}(G) = \sum_{i} p_i g_i = \frac{19}{80} \cdot 3 + \frac{19}{80} \cdot 0 + \frac{21}{80} \cdot 5 + \frac{21}{80} \cdot 1 = \frac{183}{80} \approx 2.29$$
+$$E_{\text{Spieler 2}}(G) = \sum_{i} p_i g_i = \frac{19}{80} \cdot 3 + \frac{19}{80} \cdot 5 + \frac{21}{80} \cdot 0 + \frac{21}{80} \cdot 1 = \frac{173}{80} \approx 2.16$$
 \textbf{Antwort:} Auch in diesem Beispiel liegen dank der hohen Anzahl an Durchläufen die empirisch erhaltenen Resultate sehr nah an den errechneten Erwartungswerten.
-Nach dem Runden auf zwei Nachkommastellen wie bei Preisen in CHF übrig ist keine Abweichung mehr feststellbar.
+Nach dem Runden auf zwei Nachkommastellen, wie bei Preisen in CHF üblich, ist keine Abweichung mehr feststellbar.
 \newpage
 
 \item Testen Sie die optimale Strategie PROB gegen die Strategie REAC. Welche Strategie scheint effizienter?
@@ -282,8 +282,8 @@ total:    305,285.00 |        3.06
 Das bestmögliche Resultat, welches Spieler 1 in diesem Fall noch erreichen könnte, wäre ebenfalls immer zu betrügen und so den Gewinn von Spieler 2 zu minimieren.
 In diesem Extremfall würden beide nur noch $1$ gewinnen.\\
 Allerdings kann dieser Extremfall nicht als Massstab genommen werden, um die Effizienz der zwei Strategien zu beurteilen.
-Leider ist es so, dass die Strategie REAC keine Chance gegen die Strategie PROB mit einer Wahrscheinlichkeit zu kooperieren $p < 0.5$ hat.
-Nur Wenn die Wahrscheinlichkeit $p$ grösser als $0.5$ ist, hat die Strategie REAC eine realistische Chance zu gewinnen.\\
+Leider ist es so, dass die Strategie REAC keine Chance gegen die Strategie PROB mit einer Wahrscheinlichkeit zu kooperieren $p<0.5$ hat.
+Nur wenn $p \geq 0.5$ ist, hat die Strategie REAC eine realistische Chance zu gewinnen.\\
 Dies liegt daran, dass die Strategie REAC davon ausgeht, dass der andere Spieler eine nicht-zufällige Strategie verfolgt.
 Doch die Strategie PROB ist genau dass: zufällig.\\
 Die Strategie PROB ist von daher effizienter, als dass sie nicht von unüberprüfbaren Annahmen ausgeht.
@@ -354,7 +354,7 @@ total:     45,397.00 |        4.54
 Zusammen gewinnen sie also durchschnittlich $4.54$.
 
 \item Kann diese Strategie mit einer Markov-Kette modelliert werden? Erklären Sie warum.\\
-\textbf{Antwort:} Ja, da wir aus der Aufgabenstellung die möglichen Zustände $X=0$ (betrügen) und $X=1$ (kooperieren) sowie die Wahrscheinlichkeiten der Übergänge kennen.
+\textbf{Antwort:} Ja, da wir aus der Aufgabenstellung die möglichen Zustände $X=0$ (betrügen) und $X=1$ (kooperieren) sowie die Wahrscheinlichkeiten der Übergänge zwischen beiden kennen.
 \begin{center}
 \begin{tikzpicture}[->,auto,semithick,node distance=3cm]
 \tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
@@ -417,10 +417,15 @@ $$\vec x_s = \begin{pmatrix}
  0.48 & 0.52
 \end{pmatrix}$$
 
+Wir errechnen damit den mittleren Gewinn:
+$$E(G) = \sum_i \sum_j p_i q_j g_{i,j}$$
+$$E(G) = 0.48 \cdot 0.5 \cdot 1 + 0.48 \cdot 0.5 \cdot 5 + 0.52 \cdot 0.5 \cdot 0 + 0.52 \cdot 0.5 \cdot 3 = 2.22$$
+
 Es gibt genau einen stationären Vektor $\vec x_s = \begin{pmatrix} 0.48 & 0.52 \end{pmatrix}$.
+Der durchschnittliche Gewinn für den Spieler 1, falls der Spieler 2 zufällig ($P(Y=0)=P(Y=1)=0.5$) spielt, ist $2.22$.
 
 \item Konvergiert diese Markov-Kette gegen eine Grenzverteilung? Beantworten Sie diese Frage mithilfe der vorhergehenden Frage.\\
-\textbf{Antwort:} Eine Matrix $P_s$ stellt eine Grenzverteilung dar, falls:
+\textbf{Antwort:} Eine Matrix $P_s$ stellt die Grenzverteilung einer Übergangsmatrix $P$ dar, falls:
 $$\lim_{n \to \infty} P^n = \begin{pmatrix}
  \vec x_s\\
  \vec x_s
@@ -436,20 +441,20 @@ $$P_s = \begin{pmatrix}
 \end{pmatrix}$$
 
 Ja, da die Übergangsmatrix den stationären Vektor $\vec x_s = \begin{pmatrix} 0.48 & 0.52 \end{pmatrix}$ besitzt, konvergiert sie gegen die Grenzverteilung $P_s = \begin{pmatrix}
- \vec x_s\\
- \vec x_s
-\end{pmatrix} = \begin{pmatrix}
  0.48 & 0.52\\
  0.48 & 0.52
 \end{pmatrix}$.
 
 \item Stellen Sie eine Verbindung mit den empirisch gewonnenen Resultaten her.\\
 \textbf{Antwort:} Wie wir aus einer vorherigen Aufgabe wissen, sind die relativen Häufigkeiten für 10'000 Durchführung $P(1, 1) = 0.257$, $P(1, 0) = 0.259$, $P(0, 1) = 0.245$ und $P(0, 0) = 0.239$.\\
-Summiert ergibt dies die empirischen Resultate:
-$$P(X = 0) = P(0, 1) + P(0, 0) = 0.245 + 0.239 = 0.484 \approx 0.48$$
-und
+Summiert ergibt dies die folgenden empirischen Resultate:
+$$P(X = 0) = P(0, 1) + P(0, 0) = 0.245 + 0.239 = 0.484 \approx 0.48,$$
 $$P(X = 1) = P(1, 1) + P(1, 0) = 0.257 + 0.259 = 0.516 \approx 0.52.$$
+Weiter haben wir empirisch folgende Gewinne ermittelt:
+$$G_{\text{Spieler 1}}=2.23, G_{\text{Spieler 2}}=2.31.$$
+
 Diese Wahrscheinlichkeiten zu kooperieren bzw. zu betrügen stimmen genau mit den Werten des stationären Vektors und der Grenzverteilungsmatrix überein.
+Der errechnete Gewinn für Spieler 1 liegt sehr nahe ($|\varepsilon|<10^{-2}$) am empirisch ermittelten Gewinn.
 \end{enumerate}
 \newpage
 
@@ -459,11 +464,11 @@ Geben Sie den Inhalt dieses Gesetzes wieder und erklären Sie es mithilfe Ihrer 
 $$\lim_{n\rightarrow\infty}\operatorname{P}\left(\left|\overline{X}_n\right|>\varepsilon\right)=0$$
 für alle positiven Zahlen $\varepsilon$, wobei
 $$\overline{X}_n=\tfrac1n \textstyle\sum\limits_{i=1}^{n}(X_i-E ({X}_i)).$$
-Das heisst, dass für jedes noch so kleine $\varepsilon > 0$ die Wahrscheinlichkeit, dass die relative Häufigkeit des Ereignisses nicht im Intervall $(x - \varepsilon, x + \varepsilon)$ liegt, gegen null konvergiert, wenn die Anzahl der Versuche ins unendliche steigt.\\
+Das heisst, dass für jedes noch so kleine $\varepsilon > 0$ die Wahrscheinlichkeit, dass die relative Häufigkeit des Ereignisses nicht im Intervall $(x - \varepsilon, x + \varepsilon)$ liegt, gegen null konvergiert, wenn die Anzahl der Versuche ins Unendliche steigt.\\
 Einfacher ausgedrückt besagt es, dass die relative Häufigkeit jedes Ereignisses eines Zufallsexperiments sich der Wahrscheinlichkeit dieses Ereignisses annähert, wenn das Experiment immer wieder durchgeführt wird.\\
-Dies konnten wir beobachten, da die relative Häufigkeit bei einer höheren Anzahl Durchführungen (z.B. $n=10'000$ oder $n=100'000$) näher an der errechneten Wahrscheinlichkeit lag, als mit einer tieferen Anzahl Durchführungen (z.B. $n=10$).\\
+Dies konnten wir beobachten, da die relative Häufigkeit bei einer höheren Anzahl Durchführungen ($n=10'000$ oder $n=100'000$) näher an der errechneten Wahrscheinlichkeit lag, als mit einer tieferen Anzahl Durchführungen ($n=10$).\\
 \\
-Als Beispiel wollen wir nochmals die Resultate der Aufgabe 1 zusammenfassen:\\
+Als Beispiel wollen wir nochmals die Resultate der Strategie PROB zusammenfassen:\\
 \begin{center}
 \begin{tabular}{c|c c c c}
  Wahrscheinlichkeit & relative Häufigkeit & relative Häufigkeit & relative Häufigkeit\\
@@ -477,7 +482,7 @@ Als Beispiel wollen wir nochmals die Resultate der Aufgabe 1 zusammenfassen:\\
 Wie eindeutig zu sehen ist, nähern sich die eingetretenen relativen Häufigkeiten mit höherer Anzahl Durchführungen $n$ der erreichneten Wahrscheinlichkeit an.\\
 Beim Experiment mit $n=10$ Runden liegen die relativen Häufigkeiten noch um $\pm 0.3$ neben den errechneten Wahrscheinlichkeiten.\\
 Beim Experiment mit $n=100'000$ Runden liegen die sie nur noch um $\pm 0.02$ daneben.\\
-Und bei der Durchführung von $n=2'000'000$ Runden sind die Abweichungen $\left|\varepsilon\right|<10^{-3}$ und können nicht mehr ermittelt werden.
+Und bei der Durchführung von $n=2'000'000$ Runden sind die Abweichungen $|\varepsilon|<10^{-3}$ und können nicht mehr ermittelt werden.
 \newpage
 
 \item Definieren Sie Ihre eigene Strategie und begründen Sie diese.
@@ -506,14 +511,14 @@ total:    394,874.00 |        3.95
 Wenn der Spieler in mehr als der Hälfte der Runden (genau: $>53\%$ der Runden) mehr als der Gegner gewonnen hat (genau: $>53\%$ des kumulierten Gewinns),
 kooperiert der Spieler mit einer sehr hohen Wahrscheinlichkeit (genau: $93\%$).\\
 Wenn dies nicht zutrifft nur mit einer sehr tiefen Wahrscheinlichkeit (genau: $3\%$).\\
-Die Strategie ist zuverlässiger, da sie nicht nur eine Runde sondern bis zu sieben Runden zurückblickt.\\
+Die Strategie ist zuverlässiger als PROB, REAC und ALTE, da sie nicht nur eine Runde sondern bis zu sieben Runden zurückblickt.\\
 Ausserdem versucht die Strategie dadurch, dass sie unter bestimmten Bedingungen nicht immer dasselbe macht - es also eine kleine Wahrscheinlichkeit (genau: $7\%$ bzw. $3\%$) gibt,
-einen nicht naheliegenden Zug zu machen - eine verfahrende Spielsituation (beispielsweise dass sich beide Spieler nur noch betrügen) aufzulösen und so einen höheren Gewinn zu erlauben.\\
-Ein Spieler, der unsere eigene Strategie spielt, gewinnt im Durchschnitt folgende Beträge:
+einen nicht naheliegenden Zug zu machen - eine verfahrene Spielsituation (beispielsweise dass sich beide Spieler nur noch betrügen) aufzulösen und so einen höheren Gewinn zu erzielen.\\
+Ein Spieler, der unsere eigene Strategie verfolgt, gewinnt im Durchschnitt folgende Beträge:
 \begin{center}
 \begin{tabular}{c c c c}
  Strategie Spieler 2 & Gewinn Spieler 1 & Gewinn Spieler 2 & Gewinner \\
-        50/50        &      $2.67$      &      $1.28$      & Spieler 1\\
+     RAND (50/50)    &      $2.67$      &      $1.28$      & Spieler 1\\
         PROB         &      $2.39$      &      $1.16$      & Spieler 1\\
         REAC         &      $2.34$      &      $1.11$      & Spieler 1\\
         ALTE         &      $2.75$      &      $1.30$      & Spieler 1\\
@@ -522,6 +527,6 @@ Ein Spieler, der unsere eigene Strategie spielt, gewinnt im Durchschnitt folgend
 \end{tabular}
 \end{center}
 Wie zu sehen ist, gewinnt ein Spieler mit unserer Strategie gegen alle anderen vorgegebenen Strategien.
-Gegen die beiden "optimierten" (betrügenden) Strategien kann man gar nicht gewinnen, allerdings ist dort der Verlust im Vergleich zu Spieler 2 minimiert.
+Gegen die beiden 'optimierten' (betrügenden) Strategien kann man gar nicht gewinnen, allerdings ist dort der Verlust im Vergleich zu Spieler 2 minimiert.
 \end{enumerate}
 \end{document}
